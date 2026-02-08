@@ -87,9 +87,7 @@ $htmlBody = '<!DOCTYPE html>
     <div style="max-width: 600px; margin: 0 auto; padding: 24px;">
         <!-- Header -->
         <div style="text-align: center; margin-bottom: 24px;">
-            <div style="display: inline-block; background: linear-gradient(135deg, #6366f1, #7c3aed); padding: 12px 16px; border-radius: 12px; margin-bottom: 16px;">
-                <span style="color: white; font-size: 24px;">⚡</span>
-            </div>
+            <img src="https://getaiwired.com/images/getaiwired-logo.svg" alt="GetAIWired" style="height: 50px; margin-bottom: 16px;">
             <h1 style="margin: 0; color: #1f2937; font-size: 24px;">AI Readiness Report</h1>
             <p style="margin: 8px 0 0; color: #6b7280; font-size: 14px;">' . $company . ' · ' . $industry . '</p>
         </div>
