@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>What's Your Company's AI Score? | GetAIWired</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans',sans-serif}
+    html,body{height:100%;background:#080b16;color:#e2e8f0}
+    .landing{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px 20px;position:relative;overflow:hidden}
+    .grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(99,102,241,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.05) 1px,transparent 1px);background-size:50px 50px;mask:radial-gradient(ellipse 70% 50% at 50% 40%,black,transparent);-webkit-mask:radial-gradient(ellipse 70% 50% at 50% 40%,black,transparent)}
+    .glow{position:absolute;top:-30%;left:15%;width:70%;height:80%;background:radial-gradient(ellipse,rgba(99,102,241,.08) 0%,transparent 70%);pointer-events:none}
+    .content{position:relative;z-index:1;max-width:520px;width:100%}
+    .logo{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:40px}
+    .logo-icon{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#818cf8,#6366f1);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 16px rgba(99,102,241,.3);font-size:16px}
+    .logo-text{color:#e2e8f0;font-size:15px;font-weight:700}
+    .logo-text span{color:#818cf8}
+    .badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:100px;background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.12);margin-bottom:20px}
+    .badge-dot{width:6px;height:6px;border-radius:50%;background:#34d399;box-shadow:0 0 6px rgba(52,211,153,.4)}
+    .badge-text{color:#a5b4fc;font-size:11px;font-weight:600}
+    h1{font-size:clamp(28px,6vw,48px);font-weight:800;line-height:1.1;margin-bottom:16px;letter-spacing:-.03em;background:linear-gradient(135deg,#f1f5f9 30%,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .subtitle{color:#94a3b8;font-size:clamp(14px,2.5vw,17px);line-height:1.65;margin-bottom:32px;max-width:400px;margin-left:auto;margin-right:auto}
+    .cta-btn{padding:16px 40px;border-radius:14px;border:none;background:linear-gradient(135deg,#6366f1,#7c3aed);color:#fff;font-size:16px;font-weight:700;cursor:pointer;width:100%;max-width:320px;box-shadow:0 4px 28px rgba(99,102,241,.35);transition:transform .2s}
+    .cta-btn:hover{transform:translateY(-2px)}
+    .stats{display:flex;justify-content:center;gap:24px;margin-top:40px;flex-wrap:wrap}
+    .stat-num{color:#e2e8f0;font-size:20px;font-weight:800}
+    .stat-label{color:#64748b;font-size:10px}
+    .footer{margin-top:48px;padding-top:20px;border-top:1px solid rgba(255,255,255,.05)}
+    .footer p{color:#1e293b;font-size:11px}
+    .footer span{color:#475569;font-weight:600}
+    .chat-container{height:100vh;height:100dvh;display:flex;flex-direction:column;max-width:520px;margin:0 auto}
+    .chat-header{padding:12px 14px 10px;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(8,11,22,.9);flex-shrink:0}
+    .header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+    .header-info{display:flex;align-items:center;gap:8px}
+    .header-avatar{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#818cf8,#6366f1);display:flex;align-items:center;justify-content:center;font-size:15px}
+    .header-name{color:#f1f5f9;font-size:14px;font-weight:700}
+    .header-status{color:#4ade80;font-size:10px;display:flex;align-items:center;gap:4px}
+    .status-dot{width:4px;height:4px;border-radius:50%;background:#4ade80}
+    .header-brand{color:#334155;font-size:10px}
+    .progress-bar{height:3px;background:rgba(255,255,255,.05);border-radius:2px}
+    .progress-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#6366f1,#a78bfa);transition:width .5s}
+    .chat-messages{flex:1;overflow-y:auto;padding:14px 12px}
+    .message{display:flex;margin-bottom:8px;animation:fadeIn .3s}
+    .message.ai{justify-content:flex-start}
+    .message.user{justify-content:flex-end}
+    .msg-avatar{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#818cf8,#6366f1);display:flex;align-items:center;justify-content:center;margin-right:8px;font-size:14px;flex-shrink:0}
+    .msg-bubble{max-width:82%;padding:11px 15px;font-size:14px;line-height:1.55}
+    .message.ai .msg-bubble{background:rgba(255,255,255,.05);border-radius:3px 14px 14px 14px;border:1px solid rgba(255,255,255,.07);color:#d1d5db}
+    .message.user .msg-bubble{background:linear-gradient(135deg,#6366f1,#7c3aed);border-radius:14px 3px 14px 14px;color:#fff}
+    .typing{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+    .typing-dots{display:flex;gap:5px;padding:11px 14px;background:rgba(255,255,255,.05);border-radius:3px 14px 14px 14px;border:1px solid rgba(255,255,255,.07)}
+    .typing-dot{width:7px;height:7px;border-radius:50%;background:#818cf8;animation:bounce 1.2s infinite}
+    .typing-dot:nth-child(2){animation-delay:.15s}
+    .typing-dot:nth-child(3){animation-delay:.3s}
+    @keyframes bounce{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    .input-area{border-top:1px solid rgba(255,255,255,.06);background:rgba(8,11,22,.95);flex-shrink:0;max-height:50vh;display:flex;flex-direction:column}
+    .text-input-wrap{display:flex;gap:7px;padding:10px 12px 14px}
+    .text-input{flex:1;padding:12px 14px;border-radius:11px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#e2e8f0;font-size:16px;outline:none}
+    .text-input:focus{border-color:rgba(99,102,241,.4)}
+    .send-btn{padding:12px 16px;border-radius:11px;border:none;background:rgba(255,255,255,.05);color:#334155;font-size:15px;cursor:pointer}
+    .send-btn.active{background:linear-gradient(135deg,#6366f1,#7c3aed);color:#fff}
+    .options-wrap{overflow-y:auto;padding:8px 12px 14px}
+    .option-btn{display:block;width:100%;padding:11px 14px;margin-bottom:5px;border-radius:10px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03);color:#cbd5e1;font-size:14px;text-align:left;cursor:pointer;transition:all .15s}
+    .option-btn:hover{background:rgba(99,102,241,.1);border-color:rgba(99,102,241,.2)}
+    .multi-wrap{overflow-y:auto;padding:8px 12px 4px;flex:1}
+    .multi-options{display:flex;flex-wrap:wrap;gap:6px}
+    .multi-btn{padding:9px 14px;border-radius:20px;border:1.5px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:#9ca3af;font-size:13px;cursor:pointer;white-space:nowrap}
+    .multi-btn.selected{border-color:rgba(99,102,241,.5);background:rgba(99,102,241,.15);color:#a5b4fc}
+    .multi-submit{padding:8px 12px 14px;border-top:1px solid rgba(255,255,255,.04)}
+    .continue-btn{width:100%;padding:13px;border-radius:12px;border:none;background:rgba(255,255,255,.05);color:#334155;font-size:14px;font-weight:700;cursor:pointer}
+    .continue-btn.active{background:linear-gradient(135deg,#6366f1,#7c3aed);color:#fff}
+    .gate{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;text-align:center;padding:20px}
+    .gate-icon{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#818cf8,#6366f1);display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:26px}
+    .gate h2{font-size:21px;font-weight:800;margin-bottom:8px}
+    .gate p{color:#94a3b8;font-size:14px;line-height:1.6;margin-bottom:24px;max-width:300px}
+    .gate input{width:100%;max-width:300px;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#e2e8f0;font-size:16px;text-align:center;margin-bottom:10px;outline:none}
+    .gate input:focus{border-color:rgba(99,102,241,.5)}
+    .gate button{width:100%;max-width:300px;padding:14px;border-radius:12px;border:none;background:rgba(255,255,255,.06);color:#475569;font-size:15px;font-weight:700;cursor:default}
+    .gate button.active{background:linear-gradient(135deg,#6366f1,#7c3aed);color:#fff;cursor:pointer}
+    .gate .note{color:#475569;font-size:11px;margin-top:12px}
+    .spinner{width:36px;height:36px;border:3px solid rgba(99,102,241,.2);border-top-color:#818cf8;border-radius:50%;animation:spin .8s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .report{padding:0 2px 20px}
+    .report-tabs{display:flex;gap:3px;margin-bottom:20px;background:rgba(255,255,255,.04);border-radius:10px;padding:3px}
+    .tab-btn{flex:1;padding:9px;border-radius:8px;border:none;background:transparent;color:#64748b;font-size:13px;font-weight:600;cursor:pointer}
+    .tab-btn.active{background:rgba(99,102,241,.2);color:#a5b4fc}
+    .report-header{text-align:center;margin-bottom:28px}
+    .report-badge{display:inline-block;padding:4px 12px;border-radius:100px;background:rgba(99,102,241,.1);color:#a5b4fc;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+    .report h2{font-size:22px;font-weight:800;margin-bottom:4px}
+    .report-date{color:#64748b;font-size:12px}
+    .score-card{display:flex;flex-direction:column;align-items:center;background:rgba(255,255,255,.03);border-radius:16px;border:1px solid rgba(255,255,255,.06);padding:24px 18px;margin-bottom:16px}
+    .score-ring{position:relative;width:120px;height:120px}
+    .score-ring svg{transform:rotate(-90deg)}
+    .score-ring circle{fill:none;stroke-width:8}
+    .score-ring .bg{stroke:rgba(255,255,255,.06)}
+    .score-ring .fg{stroke-linecap:round;transition:stroke-dashoffset 1.4s}
+    .score-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:32px;font-weight:800}
+    .score-level{margin-top:12px;padding:4px 12px;border-radius:100px;font-size:12px;font-weight:700}
+    .score-desc{color:#94a3b8;font-size:13px;text-align:center;margin-top:8px;line-height:1.5;max-width:320px}
+    .card{background:rgba(255,255,255,.03);border-radius:14px;border:1px solid rgba(255,255,255,.06);padding:18px;margin-bottom:16px}
+    .card h3{color:#e2e8f0;font-size:14px;font-weight:700;margin-bottom:14px}
+    .opp-card{padding:14px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);margin-bottom:8px}
+    .opp-header{display:flex;gap:8px}
+    .opp-icon{font-size:20px}
+    .opp-content{flex:1}
+    .opp-title{color:#e2e8f0;font-weight:700;font-size:13px;margin-bottom:4px}
+    .opp-tags{display:flex;gap:4px;margin-bottom:6px}
+    .opp-tag{padding:2px 8px;border-radius:100px;font-size:10px;font-weight:600}
+    .opp-tag.high{background:rgba(52,211,153,.1);color:#34d399}
+    .opp-tag.med{background:rgba(251,191,36,.1);color:#fbbf24}
+    .opp-tag.effort{background:rgba(99,102,241,.1);color:#a5b4fc}
+    .opp-desc{color:#94a3b8;font-size:12px;line-height:1.5}
+    .summary-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+    .summary-label{color:#64748b;font-size:12px}
+    .summary-value{color:#cbd5e1;font-size:12px;font-weight:600}
+    .bottleneck{margin-top:12px}
+    .bottleneck-label{color:#64748b;font-size:11px;display:block;margin-bottom:4px}
+    .bottleneck-text{padding:10px 12px;border-radius:10px;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.12);color:#fbbf24;font-size:12px;font-style:italic}
+    .cta-card{background:linear-gradient(135deg,rgba(99,102,241,.1),rgba(139,92,246,.1));border-radius:14px;border:1px solid rgba(99,102,241,.15);padding:22px 18px;text-align:center;margin-bottom:16px}
+    .cta-card h3{font-size:16px;font-weight:800;margin-bottom:6px}
+    .cta-card p{color:#94a3b8;font-size:13px;margin-bottom:16px}
+    .cta-card button{padding:13px 28px;border-radius:12px;border:none;background:linear-gradient(135deg,#6366f1,#7c3aed);color:#fff;font-size:14px;font-weight:700;cursor:pointer}
+    .restart-btn{display:block;margin:16px auto;padding:10px 20px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:transparent;color:#475569;font-size:12px;cursor:pointer}
+    .email-preview{background:rgba(255,255,255,.03);border-radius:14px;border:1px solid rgba(255,255,255,.06);overflow:hidden}
+    .email-header{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02)}
+    .email-row{display:flex;justify-content:space-between;margin-bottom:6px}
+    .email-label{color:#64748b;font-size:11px}
+    .email-value{color:#cbd5e1;font-size:12px}
+    .email-value.subject{color:#e2e8f0;font-weight:600}
+    .email-body{padding:20px 16px;color:#c8cdd5;font-size:13px;line-height:1.75}
+    .email-body p{margin-bottom:14px}
+    .email-body strong{color:#e2e8f0}
+    .email-cta{display:inline-block;padding:10px 20px;border-radius:8px;background:linear-gradient(135deg,#6366f1,#7c3aed);color:#fff;font-weight:700;font-size:13px}
+    .hidden{display:none!important}
+  </style>
+</head>
+<body>
+  <div id="landing" class="landing">
+    <div class="grid-bg"></div><div class="glow"></div>
+    <div class="content">
+      <div class="logo"><div class="logo-icon">⚡</div><div class="logo-text">GetAIWired<span>.com</span></div></div>
+      <div class="badge"><div class="badge-dot"></div><div class="badge-text">Free · 5 Minutes · Industry-Specific</div></div>
+      <h1>What's Your<br>Company's AI Score?</h1>
+      <p class="subtitle">Chat with our AI advisor. Get a tailored assessment based on your industry, tech stack, and workflows.</p>
+      <button class="cta-btn" onclick="startAudit()">Get My AI Score →</button>
+      <div class="stats">
+        <div class="stat"><div class="stat-num">6+</div><div class="stat-label">Industries</div></div>
+        <div class="stat"><div class="stat-num">150+</div><div class="stat-label">Audited</div></div>
+        <div class="stat"><div class="stat-num">$2.4M</div><div class="stat-label">Savings Found</div></div>
+      </div>
+      <div class="footer"><p>Powered by <span>IntelliSmart AI</span></p></div>
+    </div>
+  </div>
+  <div id="chat" class="chat-container hidden">
+    <div class="chat-header">
+      <div class="header-top">
+        <div class="header-info"><div class="header-avatar">⚡</div><div><div class="header-name">Alex · AI Advisor</div><div class="header-status"><span class="status-dot"></span> Online</div></div></div>
+        <div class="header-brand">GetAIWired.com</div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+    </div>
+    <div class="chat-messages" id="messages"></div>
+    <div class="input-area" id="inputArea"></div>
+  </div>
+  <div id="gate" class="chat-container hidden">
+    <div class="chat-header"><div class="header-top"><div class="header-info"><div class="header-avatar">⚡</div><div><div class="header-name">Alex · AI Advisor</div><div class="header-status"><span class="status-dot"></span> Online</div></div></div><div class="header-brand">GetAIWired.com</div></div></div>
+    <div class="chat-messages"><div class="gate" id="gateContent"></div></div>
+  </div>
+  <div id="report" class="chat-container hidden">
+    <div class="chat-header"><div class="header-top"><div class="header-info"><div class="header-avatar">⚡</div><div><div class="header-name">Alex · AI Advisor</div><div class="header-status"><span class="status-dot"></span> Online</div></div></div><div class="header-brand">GetAIWired.com</div></div></div>
+    <div class="chat-messages" id="reportContent"></div>
+  </div>
+<script>
+var INDUSTRY_DATA={"Technology / SaaS":{tasks:["Bug triage","Documentation","Code review","Onboarding","Analytics","Sales demos","Billing","Knowledge mgmt"],followUp:{q:"Biggest scaling challenge?",opts:["Onboarding","Support volume","Manual QA","Data silos","Docs"]}},"Professional Services":{tasks:["Proposals","Time tracking","Client reports","Research","Meeting notes","Scheduling","Contracts","Knowledge sharing"],followUp:{q:"Where does unbillable time go?",opts:["Proposals","Admin","Meetings","Research","Approvals"]}},"E-commerce / Retail":{tasks:["Product descriptions","Inventory","Order tracking","Customer service","Returns","Marketing","Pricing","Reviews"],followUp:{q:"Biggest headache?",opts:["Inventory","Support","Listings","Returns","Personalization"]}},"Healthcare":{tasks:["Patient intake","Claims","Scheduling","Clinical docs","Compliance","Follow-ups","Referrals","Insurance"],followUp:{q:"Top compliance concern?",opts:["HIPAA","Billing","Documentation","Audits","Security"]}},"Finance / Accounting":{tasks:["Reconciliation","Reporting","Tax prep","AP/AR","Expenses","Audit prep","Advisory","Payroll"],followUp:{q:"Where do errors hurt?",opts:["Reconciliation","Data entry","Reports","Compliance","Deliverables"]}},"Manufacturing":{tasks:["Production","Quality","Supply chain","Maintenance","Materials","Safety","Shipping","Vendors"],followUp:{q:"Most costly issue?",opts:["Downtime","Defects","Supply","Inventory","Safety"]}}};
+var DEFAULT_TASKS=["Data entry","Reports","Support","Documents","Scheduling","Leads","Inventory","Content"];
+var answers={},currentQ=0,selectedMulti=[],userEmail="";
+var questions=[{id:"company",q:"What's the name of your company?",type:"text"},{id:"contact",q:"Who am I speaking with? Name and role?",type:"text"},{id:"industry",q:"What industry is {company} in?",type:"choice",opts:["Technology / SaaS","Professional Services","E-commerce / Retail","Healthcare","Finance / Accounting","Manufacturing","Real Estate","Education","Other"]},{id:"size",q:"How large is your team?",type:"choice",opts:["1-10","11-50","51-200","201-1000","1000+"]},{id:"systems",q:"What systems does {company} use?",type:"multi",opts:["ERP","CRM","Project Mgmt","Accounting","Custom Software","Spreadsheets","Email only","Other"]},{id:"integration",q:"How connected are those systems?",type:"choice",opts:["Fully integrated","Partially integrated","Mostly siloed","Disconnected"]},{id:"dataQuality",q:"How's your data quality?",type:"choice",opts:["Excellent","Good","Fair","Poor"]},{id:"tasks",q:"Which eat up hours every week?",type:"multi",opts:[]},{id:"hours",q:"Hours/week on manual work?",type:"choice",opts:["Under 5","5-15","15-30","30-50","50+"]},{id:"bottleneck",q:"Biggest bottleneck?",type:"text"},{id:"custFacing",q:"Time on customer communication?",type:"choice",opts:["Very little","Some","A lot","Overwhelming"]},{id:"industryDetail",q:"",type:"choice",opts:[]},{id:"currentAI",q:"Used any AI tools?",type:"choice",opts:["Yes actively","A little","Looked into it","Not at all"]},{id:"concerns",q:"Concerns about AI?",type:"multi",opts:["Security","Accuracy","Cost","Adoption","Jobs","Where to start","Compliance","None"]},{id:"adoptSpeed",q:"How fast adopt new tech?",type:"choice",opts:["Fast","Moderate","Slow","Very slow"]},{id:"goal",q:"#1 outcome from AI?",type:"choice",opts:["Save time","Cut costs","Better CX","Data decisions","Scale","Edge"]},{id:"timeline",q:"Ideal timeline?",type:"choice",opts:["ASAP","3 months","3-6 months","6-12 months","Exploring"]},{id:"budget",q:"Budget range?",type:"choice",opts:["Under $5K","$5K-$15K","$15K-$50K","$50K+","Show ROI"]}];
+function rv(t){return t.replace(/\{(\w+)\}/g,function(_,k){return answers[k]||"there"});}
+function startAudit(){document.getElementById("landing").classList.add("hidden");document.getElementById("chat").classList.remove("hidden");showTyping();setTimeout(function(){hideTyping();addMsg("Hey! I'm Alex from IntelliSmart AI. Quick chat to find where AI helps most.",true);setTimeout(askQ,500);},1500);}
+function addMsg(t,ai){var c=document.getElementById("messages"),d=document.createElement("div");d.className="message "+(ai?"ai":"user");d.innerHTML=ai?'<div class="msg-avatar">⚡</div><div class="msg-bubble">'+t+'</div>':'<div class="msg-bubble">'+t+'</div>';c.appendChild(d);c.scrollTop=c.scrollHeight;}
+function showTyping(){var c=document.getElementById("messages"),d=document.createElement("div");d.className="typing";d.id="typing";d.innerHTML='<div class="msg-avatar">⚡</div><div class="typing-dots"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';c.appendChild(d);c.scrollTop=c.scrollHeight;}
+function hideTyping(){var e=document.getElementById("typing");if(e)e.remove();}
+function askQ(){if(currentQ>=questions.length){finishChat();return;}var q=questions[currentQ];if(q.id==="tasks"){var i=INDUSTRY_DATA[answers.industry];q.opts=i?i.tasks:DEFAULT_TASKS;}if(q.id==="industryDetail"){var i=INDUSTRY_DATA[answers.industry];if(i&&i.followUp){q.q=i.followUp.q;q.opts=i.followUp.opts;}else{q.q="What would you automate first?";q.type="text";}}document.getElementById("progress").style.width=(currentQ/questions.length*100)+"%";addMsg(rv(q.q),true);renderInput(q);}
+function renderInput(q){var a=document.getElementById("inputArea");selectedMulti=[];if(q.type==="text"){a.innerHTML='<div class="text-input-wrap"><input type="text" class="text-input" id="ti" placeholder="Type..." onkeydown="if(event.key===\'Enter\')subText()"><button class="send-btn" id="sb" onclick="subText()">↑</button></div>';document.getElementById("ti").focus();document.getElementById("ti").oninput=function(){document.getElementById("sb").className=this.value.trim()?"send-btn active":"send-btn";};}else if(q.type==="choice"){var h='<div class="options-wrap">';q.opts.forEach(function(o){h+='<button class="option-btn" onclick="subChoice(\''+o.replace(/'/g,"\\'")+'\')">'+o+'</button>';});h+='</div>';a.innerHTML=h;}else if(q.type==="multi"){var h='<div class="multi-wrap"><div class="multi-options">';q.opts.forEach(function(o){h+='<button class="multi-btn" onclick="togMulti(this,\''+o.replace(/'/g,"\\'")+'\')">'+o+'</button>';});h+='</div></div><div class="multi-submit"><button class="continue-btn" id="cb" onclick="subMulti()">Continue</button></div>';a.innerHTML=h;}}
+function subText(){var i=document.getElementById("ti"),v=i.value.trim();if(!v)return;answers[questions[currentQ].id]=v;addMsg(v,false);currentQ++;showTyping();setTimeout(function(){hideTyping();askQ();},800);}
+function subChoice(v){answers[questions[currentQ].id]=v;addMsg(v,false);currentQ++;showTyping();setTimeout(function(){hideTyping();askQ();},800);}
+function togMulti(b,v){var idx=selectedMulti.indexOf(v);if(idx>-1){selectedMulti.splice(idx,1);b.classList.remove("selected");}else{selectedMulti.push(v);b.classList.add("selected");}document.getElementById("cb").className=selectedMulti.length?"continue-btn active":"continue-btn";}
+function subMulti(){if(!selectedMulti.length)return;answers[questions[currentQ].id]=selectedMulti;addMsg(selectedMulti.join(", "),false);currentQ++;showTyping();setTimeout(function(){hideTyping();askQ();},800);}
+function finishChat(){var n=(answers.contact||"").split(/\s/)[0]||"";addMsg("That's everything, "+n+"! Generating your report...",true);document.getElementById("inputArea").innerHTML="";setTimeout(function(){document.getElementById("chat").classList.add("hidden");document.getElementById("gate").classList.remove("hidden");renderGate();},2000);}
+function renderGate(){document.getElementById("gateContent").innerHTML='<div class="gate-icon">📊</div><h2>Your Report is Ready</h2><p>Enter your email to get your AI Readiness Report for '+(answers.company||"your company")+'.</p><input type="email" id="ei" placeholder="you@company.com" onkeydown="if(event.key===\'Enter\')subEmail()" oninput="chkEmail()"><button id="eb" onclick="subEmail()">Send My Report →</button><div class="note">No spam. Report + brief follow-up.</div>';}
+function chkEmail(){var e=document.getElementById("ei").value;document.getElementById("eb").className=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)?"active":"";}
+function subEmail(){var e=document.getElementById("ei").value;if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e))return;userEmail=e;document.getElementById("gateContent").innerHTML='<div class="spinner"></div><p style="margin-top:16px">Generating...</p>';setTimeout(function(){document.getElementById("gate").classList.add("hidden");document.getElementById("report").classList.remove("hidden");renderReport();},2000);}
+function calcScore(){var s=0,m=0,sc={size:{"1-10":2,"11-50":4,"51-200":6,"201-1000":8,"1000+":10},integration:{"Fully integrated":9,"Partially integrated":6,"Mostly siloed":3,"Disconnected":1},dataQuality:{"Excellent":10,"Good":7,"Fair":4,"Poor":2},hours:{"Under 5":2,"5-15":4,"15-30":6,"30-50":8,"50+":10},custFacing:{"Very little":3,"Some":5,"A lot":7,"Overwhelming":10},currentAI:{"Yes actively":10,"A little":6,"Looked into it":3,"Not at all":1},adoptSpeed:{"Fast":10,"Moderate":7,"Slow":4,"Very slow":2},timeline:{"ASAP":10,"3 months":8,"3-6 months":6,"6-12 months":4,"Exploring":2}};for(var k in sc){if(answers[k]&&sc[k][answers[k]]!==undefined){s+=sc[k][answers[k]];m+=10;}}if(answers.systems){s+=Math.min(answers.systems.length*2,10);m+=10;}if(answers.tasks){s+=Math.min(answers.tasks.length*1.5,10);m+=10;}return m?Math.round(s/m*100):50;}
+function getLevel(p){if(p>=75)return{l:"Advanced",c:"#34d399",d:"You're primed for AI."};if(p>=50)return{l:"Developing",c:"#fbbf24",d:"Strong foundation, big wins available."};if(p>=25)return{l:"Emerging",c:"#fb923c",d:"Real potential here."};return{l:"Beginning",c:"#f87171",d:"Great starting point."};}
+function genOpps(){var o=[],t=answers.tasks||[];if(t.some(function(x){return x.match(/entry|Doc|intake|Claims/);}))o.push({t:"Document AI",i:"High",e:"Med",d:"Automate data extraction. 60-80% time savings.",ic:"📄"});if(t.some(function(x){return x.match(/support|Customer|service/);}))o.push({t:"AI Support",i:"High",e:"Med",d:"Resolve 40-60% of inquiries automatically.",ic:"💬"});if(t.some(function(x){return x.match(/Report|analytics/);}))o.push({t:"Auto Reporting",i:"High",e:"Low",d:"Real-time dashboards from your data.",ic:"📊"});if(t.some(function(x){return x.match(/Proposal|Content|Doc/);}))o.push({t:"AI Content",i:"Med",e:"Low",d:"Auto-draft in your brand voice.",ic:"✍️"});if(t.some(function(x){return x.match(/Lead|Sales|onboard/);}))o.push({t:"Lead Scoring",i:"High",e:"Med",d:"AI qualification and nurture.",ic:"🎯"});if(answers.integration&&answers.integration.match(/siloed|Disconnected/))o.push({t:"Data Integration",i:"High",e:"High",d:"Connect systems automatically.",ic:"🔗"});return o.length?o.slice(0,5):[{t:"AI Workshop",i:"High",e:"Low",d:"Map AI wins to your workflows.",ic:"🧠"}];}
+function renderReport(){var pct=calcScore(),lv=getLevel(pct),opps=genOpps(),fn=(answers.contact||"").split(/\s/)[0]||"there",topO=opps.slice(0,2).map(function(x){return x.t;}).join(" and "),r=56,c=2*Math.PI*r;document.getElementById("reportContent").innerHTML='<div class="report"><div class="report-tabs"><button class="tab-btn active" onclick="showTab(\'rt\')">Report</button><button class="tab-btn" onclick="showTab(\'et\')">Email Preview</button></div><div id="rt"><div class="report-header"><div class="report-badge">AI Readiness · '+(answers.industry||"General")+'</div><h2>'+(answers.company||"Your Company")+'</h2><div class="report-date">'+(answers.contact||"")+" · "+new Date().toLocaleDateString()+'</div></div><div class="score-card"><div class="score-ring"><svg width="120" height="120"><circle class="bg" cx="60" cy="60" r="'+r+'"/><circle class="fg" cx="60" cy="60" r="'+r+'" stroke="'+lv.c+'" stroke-dasharray="'+c+'" stroke-dashoffset="'+(c-c*pct/100)+'"/></svg><div class="score-num">'+pct+'</div></div><div class="score-level" style="background:'+lv.c+'18;color:'+lv.c+'">'+lv.l+' Readiness</div><div class="score-desc">'+lv.d+'</div></div><div class="card"><h3>Top AI Opportunities</h3>'+opps.map(function(x){return'<div class="opp-card"><div class="opp-header"><div class="opp-icon">'+x.ic+'</div><div class="opp-content"><div class="opp-title">'+x.t+'</div><div class="opp-tags"><span class="opp-tag '+(x.i==="High"?"high":"med")+'">'+x.i+' Impact</span><span class="opp-tag effort">'+x.e+' Effort</span></div><div class="opp-desc">'+x.d+'</div></div></div></div>';}).join("")+'</div><div class="card"><h3>Summary</h3>'+[["Industry",answers.industry],["Team",answers.size],["Hours/wk",answers.hours],["Integration",answers.integration],["AI Exp",answers.currentAI],["Goal",answers.goal],["Timeline",answers.timeline],["Budget",answers.budget]].filter(function(x){return x[1];}).map(function(x){return'<div class="summary-row"><span class="summary-label">'+x[0]+'</span><span class="summary-value">'+x[1]+'</span></div>';}).join("")+(answers.bottleneck?'<div class="bottleneck"><span class="bottleneck-label">Bottleneck</span><div class="bottleneck-text">"'+answers.bottleneck+'"</div></div>':'')+'</div><div class="cta-card"><h3>Next Step</h3><p>Free 15-min call for your AI roadmap.</p><button>Book Strategy Call →</button></div></div><div id="et" class="hidden"><div class="email-preview"><div class="email-header"><div class="email-row"><span class="email-label">From</span><span class="email-value">team@intellismartai.com</span></div><div class="email-row"><span class="email-label">To</span><span class="email-value">'+userEmail+'</span></div><div class="email-row"><span class="email-label">Subject</span><span class="email-value subject">'+answers.company+"'s AI Score: "+pct+'%</span></div></div><div class="email-body"><p>Hi '+fn+',</p><p>Thanks for the AI Audit for <strong>'+answers.company+'</strong>. Score: <strong style="color:'+lv.c+'">'+pct+'% — '+lv.l+'</strong>.</p><p>Top opportunities: <strong>'+topO+'</strong>.'+(answers.hours&&answers.hours!=="Under 5"?" With "+answers.hours+" hrs/week manual, ROI is significant.":"")+'</p><p>Full report attached. 15-min call to discuss?</p><p><span class="email-cta">Book Call →</span></p><p>Best,<br><strong>Peter</strong><br><span style="color:#64748b;font-size:11px">IntelliSmart AI</span></p></div></div></div><button class="restart-btn" onclick="restart()">Start New Audit</button></div>';}
+function showTab(id){document.getElementById("rt").classList.toggle("hidden",id!=="rt");document.getElementById("et").classList.toggle("hidden",id!=="et");var btns=document.querySelectorAll(".tab-btn");btns[0].classList.toggle("active",id==="rt");btns[1].classList.toggle("active",id==="et");}
+function restart(){answers={};currentQ=0;selectedMulti=[];userEmail="";document.getElementById("messages").innerHTML="";document.getElementById("report").classList.add("hidden");document.getElementById("landing").classList.remove("hidden");}
+</script>
+</body>
+</html>
