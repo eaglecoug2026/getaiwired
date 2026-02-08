@@ -87,11 +87,7 @@ $htmlBody = '<!DOCTYPE html>
     <div style="max-width: 600px; margin: 0 auto; padding: 24px;">
         <!-- Header -->
         <div style="text-align: center; margin-bottom: 24px;">
-            <div style="display: inline-block; background: #0a0a12; padding: 16px 24px; border-radius: 12px; margin-bottom: 16px;">
-                <span style="font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 22px; letter-spacing: -1px;">
-                    <span style="color: #8a8a9a; font-weight: 300;">Get</span><span style="color: #00f0ff; font-weight: 800;">AI</span><span style="color: #eaeaff; font-weight: 600;">Wired</span>
-                </span>
-            </div>
+            <img src="https://getaiwired.com/images/getaiwired-logo.png" alt="GetAIWired" style="height: 60px; margin-bottom: 16px; border-radius: 8px;">
             <h1 style="margin: 0; color: #1f2937; font-size: 24px;">AI Readiness Report</h1>
             <p style="margin: 8px 0 0; color: #6b7280; font-size: 14px;">' . $company . ' · ' . $industry . '</p>
         </div>
