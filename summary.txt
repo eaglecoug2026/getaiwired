@@ -1,0 +1,69 @@
+# GetAIWired.com - Project Summary
+# Last Updated: 2026-02-08
+
+## Overview
+AI Readiness Assessment tool - chat-based quiz that evaluates a company's AI readiness
+and generates a personalized report with score and recommendations.
+
+## Live URL
+- Domain: getaiwired.com
+- Hosted: Cloudways
+- GitHub: https://github.com/eaglecoug2026/getaiwired
+
+## Tech Stack
+- Frontend: Single-page HTML/CSS/JS (no framework)
+- Backend: PHP (for email API)
+- Email: Postmark SMTP
+- Hosting: Cloudways (deploys from GitHub)
+
+## Features
+- Landing page with CTA
+- Chat-style AI assessment (18 questions)
+- Industry-specific task recommendations
+- AI Readiness Score calculation (0-100%)
+- Personalized report with opportunities
+- Email capture gate before showing report
+- Email report delivery via Postmark
+
+## File Structure
+```
+/
+├── index.html          # Main app (landing + chat + report)
+├── summary.txt         # This file
+├── api/
+│   └── send-report.php # Postmark email API
+└── includes/
+    └── email_helper.php # Postmark SMTP helper
+```
+
+## Email Setup
+- Provider: Postmark
+- From: info@intellismartstaffing.com
+- Sends: AI Readiness Report with score and recommendations
+
+## Assessment Flow
+1. User lands on page, clicks "Get My AI Score"
+2. Chat interface asks 18 questions about:
+   - Company name, contact, industry
+   - Team size, systems used
+   - Manual tasks, hours spent
+   - AI experience, concerns
+   - Goals, timeline, budget
+3. Email gate - user enters email to see report
+4. Report shows:
+   - AI Readiness Score (0-100%)
+   - Level: Beginning/Emerging/Developing/Advanced
+   - Top AI opportunities with impact/effort
+   - Summary of answers
+   - CTA for strategy call
+5. Report emailed to user
+
+## TODO
+- [ ] Test Postmark email delivery
+- [ ] Add getaiwired.com domain to Postmark
+- [ ] Analytics/tracking
+- [ ] CRM integration for leads
+- [ ] Book call integration (Calendly?)
+
+## Related Projects
+- ProctorPilot (uses same Postmark setup)
