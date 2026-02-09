@@ -129,7 +129,7 @@ $htmlBody = '<!DOCTYPE html>
         <div style="background: linear-gradient(135deg, #6366f1, #7c3aed); border-radius: 16px; padding: 32px; text-align: center; margin-bottom: 24px;">
             <h2 style="margin: 0 0 8px; color: white; font-size: 20px;">Ready to Get AI Wired?</h2>
             <p style="margin: 0 0 20px; color: rgba(255,255,255,0.8); font-size: 14px;">Book a free 15-minute strategy call to discuss your AI roadmap.</p>
-            <a href="https://calendly.com/intellismart" style="display: inline-block; background: white; color: #6366f1; padding: 14px 32px; border-radius: 10px; font-weight: 700; text-decoration: none; font-size: 14px;">Book Strategy Call →</a>
+            <a href="https://calendly.com/admin-intellismartco/30min" style="display: inline-block; background: white; color: #6366f1; padding: 14px 32px; border-radius: 10px; font-weight: 700; text-decoration: none; font-size: 14px;">Book Strategy Call →</a>
         </div>
 
         <!-- Footer -->
@@ -163,7 +163,7 @@ foreach ($opportunities as $opp) {
 $textBody .= "
 NEXT STEP:
 Book a free 15-minute strategy call to discuss your personalized AI roadmap.
-https://calendly.com/intellismart
+https://calendly.com/admin-intellismartco/30min
 
 Best,
 The GetAIWired Team
