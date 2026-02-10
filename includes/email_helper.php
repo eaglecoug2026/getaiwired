@@ -16,8 +16,9 @@ define('SMTP_FROM_NAME', 'GetAIWired');
 
 /**
  * Send email via Postmark SMTP
+ * @param string|array $bcc - Optional BCC recipient(s)
  */
-function sendEmail($to, $subject, $htmlBody, $textBody = '', $replyTo = '') {
+function sendEmail($to, $subject, $htmlBody, $textBody = '', $replyTo = '', $bcc = '') {
     $host = SMTP_HOST;
     $port = SMTP_PORT;
     $username = SMTP_USERNAME;
@@ -103,6 +104,19 @@ function sendEmail($to, $subject, $htmlBody, $textBody = '', $replyTo = '') {
         if (substr($response, 0, 3) !== '250') {
             fclose($socket);
             return ['success' => false, 'error' => "RCPT TO failed: $response"];
+        }
+
+        // Handle BCC recipients
+        if (!empty($bcc)) {
+            $bccList = is_array($bcc) ? $bcc : [$bcc];
+            foreach ($bccList as $bccEmail) {
+                fwrite($socket, "RCPT TO:<$bccEmail>\r\n");
+                $response = fgets($socket, 1024);
+                if (substr($response, 0, 3) !== '250') {
+                    fclose($socket);
+                    return ['success' => false, 'error' => "RCPT TO (BCC) failed: $response"];
+                }
+            }
         }
 
         fwrite($socket, "DATA\r\n");

@@ -170,9 +170,9 @@ The GetAIWired Team
 IntelliSmart AI
 ";
 
-// Send email
+// Send email (with BCC to IntelliSmart)
 $subject = "$company's AI Readiness Score: $score%";
-$result = sendEmail($email, $subject, $htmlBody, $textBody, 'info@intellismartstaffing.com');
+$result = sendEmail($email, $subject, $htmlBody, $textBody, 'info@intellismartstaffing.com', 'info@intellismartstaffing.com');
 
 if ($result['success']) {
     echo json_encode(['success' => true, 'message' => 'Report sent successfully']);
