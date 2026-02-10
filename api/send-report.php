@@ -136,7 +136,7 @@ $htmlBody = '<!DOCTYPE html>
         <!-- Footer -->
         <div style="text-align: center; color: #9ca3af; font-size: 12px;">
             <p style="margin: 0 0 8px;">Sent by GetAIWired.com · IntelliSmart AI</p>
-            <p style="margin: 0;">Questions? Reply to this email.</p>
+            <p style="margin: 0;">Questions? Email <a href="mailto:support@intellismartai.com" style="color: #6366f1;">support@intellismartai.com</a></p>
         </div>
     </div>
 </body>
@@ -165,6 +165,8 @@ $textBody .= "
 NEXT STEP:
 Book a free 15-minute strategy call to discuss your personalized AI roadmap.
 https://calendly.com/admin-intellismartco/30min
+
+Questions? Email support@intellismartai.com
 
 Best,
 The GetAIWired Team
