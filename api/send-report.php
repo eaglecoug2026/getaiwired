@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 require_once __DIR__ . '/../includes/email_helper.php';
+require_once __DIR__ . '/log-submission.php';
 
 // Get JSON input
 $input = json_decode(file_get_contents('php://input'), true);
@@ -169,6 +170,9 @@ Best,
 The GetAIWired Team
 IntelliSmart AI
 ";
+
+// Log submission
+logSubmission($input);
 
 // Send email (with BCC to IntelliSmart)
 $subject = "$company's AI Readiness Score: $score%";
