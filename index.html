@@ -52,10 +52,11 @@
     .top-bar a:hover{color:var(--green)}
 
     /* ── Nav ── */
-    .sticky-header{position:sticky;top:0;z-index:1000}
+    .sticky-header{position:sticky;top:0;z-index:1000;background:rgba(6,10,16,1)}
     .nav-wrapper{background:rgba(6,10,16,.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
     .nav-wrapper.scrolled{box-shadow:0 4px 40px rgba(0,0,0,.5),0 0 1px var(--green-border)}
     .site-nav{padding:14px 20px;display:flex;align-items:center;justify-content:space-between;max-width:1140px;margin:0 auto;position:relative;z-index:100}
+    .nav-logo{overflow:hidden;display:flex;align-items:center}
     .nav-logo img{height:44px}
     .nav-links{display:flex;align-items:center;gap:28px}
     .nav-links a{color:var(--text-secondary);text-decoration:none;font-size:15px;font-weight:500;transition:color .2s;letter-spacing:.01em}
@@ -415,7 +416,7 @@
     <!-- 2. Navigation -->
     <div class="nav-wrapper" id="navWrapper">
       <nav class="site-nav">
-        <a href="#" class="nav-logo"><img src="images/intellismart-ai-logo.png?v=3" alt="IntelliSmart AI" style="height:180px;margin:-68px 0"></a>
+        <a href="#" class="nav-logo"><img src="images/intellismart-ai-logo.png?v=4" alt="IntelliSmart AI" style="height:180px;margin:-68px 0;display:block"></a>
         <div class="nav-links">
           <a href="#services">Services</a>
           <a href="#results">Results</a>
