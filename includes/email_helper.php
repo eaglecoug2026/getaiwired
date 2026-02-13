@@ -12,7 +12,7 @@ define('SMTP_PORT', 587);
 define('SMTP_USERNAME', '5033af6f-232c-460d-b247-3571db4a12e2');
 define('SMTP_PASSWORD', '5033af6f-232c-460d-b247-3571db4a12e2');
 define('SMTP_FROM_EMAIL', 'info@intellismartstaffing.com');
-define('SMTP_FROM_NAME', 'GetAIWired');
+define('SMTP_FROM_NAME', 'IntelliSmart AI');
 
 /**
  * Send email via Postmark SMTP

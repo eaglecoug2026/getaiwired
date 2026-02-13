@@ -135,7 +135,7 @@ $htmlBody = '<!DOCTYPE html>
 
         <!-- Footer -->
         <div style="text-align: center; color: #9ca3af; font-size: 12px;">
-            <p style="margin: 0 0 8px;">Sent by GetAIWired.com · IntelliSmart AI</p>
+            <p style="margin: 0 0 8px;">Sent by IntelliSmartAI.com</p>
             <p style="margin: 0;">Questions? Email <a href="mailto:support@intellismartai.com" style="color: #6366f1;">support@intellismartai.com</a></p>
         </div>
     </div>
@@ -169,7 +169,7 @@ https://calendly.com/admin-intellismartco/30min
 Questions? Email support@intellismartai.com
 
 Best,
-The GetAIWired Team
+The IntelliSmart AI Team
 IntelliSmart AI
 ";
 
