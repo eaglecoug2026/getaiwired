@@ -88,7 +88,7 @@ $htmlBody = '<!DOCTYPE html>
     <div style="max-width: 600px; margin: 0 auto; padding: 24px;">
         <!-- Header -->
         <div style="text-align: center; margin-bottom: 24px;">
-            <img src="https://getaiwired.com/images/intellismart-ai-logo.png" alt="IntelliSmart AI" style="height: 100px; margin-bottom: 16px; border-radius: 8px;">
+            <img src="https://getaiwired.com/images/intellismart-ai-logo.png" alt="IntelliSmart AI" style="height: 400px; margin-bottom: 16px; border-radius: 8px;">
             <h1 style="margin: 0; color: #1f2937; font-size: 24px;">AI Readiness Report</h1>
             <p style="margin: 8px 0 0; color: #6b7280; font-size: 14px;">' . $company . ' · ' . $industry . '</p>
         </div>
