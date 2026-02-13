@@ -1235,6 +1235,26 @@ function renderResults(){
     '<button class="restart-btn" onclick="restartAssessment()">Take Assessment Again</button>'+
   '</div>';
   b.scrollTop=0;
+
+  /* ═══ Send report email via API ═══ */
+  var emailPayload={
+    email:leadData.email,
+    contact:leadData.name,
+    company:leadData.company,
+    phone:leadData.phone||'',
+    score:res.score,
+    level:t.label,
+    levelColor:t.color,
+    industry:'General',
+    opportunities:res.sorted.slice(0,3).map(function(e){var d=e[1];return{title:d.rec.title,description:d.rec.body,impact:d.rec.impact};}),
+    summary:[
+      {label:'Overall Score',value:res.score+'%'},
+      {label:'Readiness Level',value:t.label},
+      {label:'Strongest Area',value:res.domains[res.strongest].name},
+      {label:'Biggest Opportunity',value:res.domains[res.weakest].name}
+    ]
+  };
+  fetch('api/send-report.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(emailPayload)}).catch(function(){});
 }
 
 function restartAssessment(){
