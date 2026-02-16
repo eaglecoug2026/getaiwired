@@ -1,0 +1,11 @@
+# Logs directory - contains personal data
+logs/
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

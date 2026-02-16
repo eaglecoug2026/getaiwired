@@ -1,0 +1,9 @@
+RewriteEngine On
+# Root → /assessment/
+RewriteRule ^$ https://intellismartai.com/assessment/ [R=301,L]
+RewriteRule ^index\.html$ https://intellismartai.com/assessment/ [R=301,L]
+# Preserve API/image paths
+RewriteRule ^api/(.*)$ https://intellismartai.com/assessment/api/$1 [R=301,L]
+RewriteRule ^images/(.*)$ https://intellismartai.com/assessment/images/$1 [R=301,L]
+# Catch-all
+RewriteRule ^(.*)$ https://intellismartai.com/assessment/$1 [R=301,L]
