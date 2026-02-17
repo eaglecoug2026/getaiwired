@@ -609,109 +609,216 @@ CHANGELOG — AI Wired Website v6
       background: var(--warm-beige);
     }
 
-    .services-table {
-      border: 1px solid transparent;
-      transition: border-color 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-
-    .services-table.visible {
-      border-color: var(--border);
-    }
-
-    .service-row {
+    /* ── Savings Calculator ── */
+    .calc-wrapper {
       display: grid;
-      grid-template-columns: 2.5fr 1fr 1fr;
-      padding: 32px 40px;
-      border-bottom: 1px solid var(--border);
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-top: 48px;
+    }
+
+    .calc-inputs {
+      padding: 48px;
+      background: #F6F4EF;
+    }
+
+    .calc-outputs {
+      padding: 48px;
+      background: #1C1917;
+      color: #E4E1D3;
+    }
+
+    .calc-group {
+      margin-bottom: 32px;
+    }
+
+    .calc-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .calc-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .calc-slider-row {
+      display: flex;
       align-items: center;
-      background: transparent;
-      transition: background 0.3s;
+      gap: 16px;
     }
 
-    .service-row:last-child { border-bottom: none; }
-    .service-row:hover { background: rgba(51,51,52,0.02); }
-
-    .service-row .service-name,
-    .service-row .service-price,
-    .service-row .service-old {
-      opacity: 0;
-      transform: translateX(-20px);
-      transition: opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1),
-                  transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    .calc-slider-row input[type="range"] {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
     }
 
-    .service-row.visible .service-name {
-      opacity: 1;
-      transform: translateX(0);
+    .calc-slider-row input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #B84527;
+      cursor: pointer;
+      border: 2px solid #F6F4EF;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
-    .service-row.visible .service-price {
-      opacity: 1;
-      transform: translateX(0);
-      transition-delay: 0.15s;
+    .calc-slider-row input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #B84527;
+      cursor: pointer;
+      border: 2px solid #F6F4EF;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
-    .service-row.visible .service-old {
-      opacity: 1;
-      transform: translateX(0);
-      transition-delay: 0.3s;
-    }
-
-    .service-row-header {
-      background: rgba(51,51,52,0.03);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      padding: 18px 40px;
-      opacity: 0;
-      transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-
-    .services-table.visible .service-row-header {
-      opacity: 1;
-    }
-
-    .service-row-header:hover { background: rgba(51,51,52,0.03); }
-
-    .service-name-h, .service-price-h, .service-old-h {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .service-price-h { color: #4A6B5D; }
-    .service-old-h { color: #8B3A3A; }
-
-    .service-name {
+    .calc-slider-val {
       font-family: 'Instrument Serif', serif;
-      font-size: 24px;
+      font-size: 28px;
+      color: var(--text-primary);
+      min-width: 80px;
+      text-align: right;
+    }
+
+    .calc-checkboxes {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .calc-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
       color: var(--text-primary);
     }
 
-    .service-name span {
+    .calc-check input[type="checkbox"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+      top: 1px;
+      background: #fff;
+      transition: all 0.2s;
+    }
+
+    .calc-check input[type="checkbox"]:checked {
+      background: #B84527;
+      border-color: #B84527;
+    }
+
+    .calc-check input[type="checkbox"]:checked::after {
+      content: '✓';
+      color: #fff;
+      font-size: 13px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .calc-check-text span {
       display: block;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Output side */
+    .calc-result-group {
+      margin-bottom: 36px;
+    }
+
+    .calc-result-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .calc-result-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #A8A29E;
+      margin-bottom: 8px;
+    }
+
+    .calc-result-value {
+      font-family: 'Instrument Serif', serif;
+      font-size: 42px;
+      color: #E4E1D3;
+      letter-spacing: -0.02em;
+      transition: all 0.3s ease;
+    }
+
+    .calc-result-value.savings {
+      font-size: 56px;
+      color: #1B6B42;
+    }
+
+    .calc-result-sub {
       font-family: 'Inter', sans-serif;
       font-size: 14px;
-      color: var(--text-muted);
-      margin-top: 6px;
+      color: #57534E;
+      margin-top: 4px;
     }
 
-    .service-price {
-      font-family: 'Instrument Serif', serif;
-      font-size: 28px;
-      color: #4A6B5D;
-      font-weight: 400;
+    .calc-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin: 28px 0;
     }
 
-    .service-old {
-      font-family: 'Instrument Serif', serif;
-      font-size: 22px;
-      color: #8B3A3A;
-      text-decoration: line-through;
+    .calc-cta {
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    .calc-cta .btn-primary {
+      background: #B84527;
+      border-color: #B84527;
+    }
+
+    .calc-cta .btn-primary:hover {
+      background: #9a3a20;
+      border-color: #9a3a20;
+    }
+
+    @media (max-width: 768px) {
+      .calc-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .calc-inputs, .calc-outputs {
+        padding: 32px 24px;
+      }
+      .calc-result-value { font-size: 32px; }
+      .calc-result-value.savings { font-size: 42px; }
+      .calc-slider-val { font-size: 22px; min-width: 60px; }
     }
 
     .pricing-section {
@@ -720,8 +827,7 @@ CHANGELOG — AI Wired Website v6
     }
 
     @media (max-width: 768px) {
-      .service-row { grid-template-columns: 1fr; gap: 8px; padding: 24px; }
-      .service-row-header { display: none; }
+      /* services table removed — replaced by calculator */
     }
 
     .services-header {
@@ -1755,40 +1861,100 @@ CHANGELOG — AI Wired Website v6
   <section class="services-section" id="services">
     <div class="container">
     <div class="services-header">
-      <div class="label reveal">What We Automate</div>
+      <div class="label reveal">Savings Calculator</div>
       <h2 class="display-2 reveal reveal-delay-1">If your team does it twice a week, it should be automated.</h2>
+      <p class="reveal reveal-delay-1" style="font-family:'Inter',sans-serif;font-size:17px;color:var(--text-muted);margin-top:12px">See exactly how much you'd save with AI automation.</p>
     </div>
-    <div class="services-table">
-      <div class="service-row service-row-header">
-        <div class="service-name-h">Service</div>
-        <div class="service-price-h">IntelliSmart AI</div>
-        <div class="service-old-h">Traditional Cost</div>
+
+    <div class="calc-wrapper fade-up">
+      <!-- LEFT: Inputs -->
+      <div class="calc-inputs">
+        <div class="calc-group">
+          <label class="calc-label">Team Size</label>
+          <div class="calc-slider-row">
+            <input type="range" id="calcTeam" min="1" max="50" value="5">
+            <div class="calc-slider-val" id="calcTeamVal">5</div>
+          </div>
+        </div>
+
+        <div class="calc-group">
+          <label class="calc-label">Average Hourly Cost</label>
+          <div class="calc-slider-row">
+            <input type="range" id="calcRate" min="25" max="150" value="45" step="5">
+            <div class="calc-slider-val" id="calcRateVal">$45</div>
+          </div>
+        </div>
+
+        <div class="calc-group">
+          <label class="calc-label">Departments to Automate</label>
+          <div class="calc-checkboxes">
+            <label class="calc-check">
+              <input type="checkbox" data-dept="crm" data-setup="1250" data-monthly="375" checked>
+              <div class="calc-check-text">CRM & Sales<span>Lead routing, follow-ups, pipeline</span></div>
+            </label>
+            <label class="calc-check">
+              <input type="checkbox" data-dept="ops" data-setup="1250" data-monthly="375" checked>
+              <div class="calc-check-text">Operations & Workflows<span>Data entry, document gen, approvals</span></div>
+            </label>
+            <label class="calc-check">
+              <input type="checkbox" data-dept="finance" data-setup="1750" data-monthly="375">
+              <div class="calc-check-text">Finance & Accounting<span>Invoice processing, reconciliation, reporting</span></div>
+            </label>
+            <label class="calc-check">
+              <input type="checkbox" data-dept="support" data-setup="1250" data-monthly="375">
+              <div class="calc-check-text">Customer Support<span>Ticket routing, FAQ bots, escalation</span></div>
+            </label>
+          </div>
+        </div>
+
+        <div class="calc-group">
+          <label class="calc-label">Hours Per Week on Manual Tasks</label>
+          <div class="calc-slider-row">
+            <input type="range" id="calcHours" min="5" max="80" value="20">
+            <div class="calc-slider-val" id="calcHoursVal">20 hrs</div>
+          </div>
+        </div>
       </div>
-      <div class="service-row">
-        <div class="service-name">CRM & Sales Automation<span>Lead routing, follow-ups, pipeline management</span></div>
-        <div class="service-price">$1,250</div>
-        <div class="service-old">$15,000+</div>
+
+      <!-- RIGHT: Outputs -->
+      <div class="calc-outputs">
+        <div class="calc-result-group">
+          <div class="calc-result-label">Current Annual Cost of Manual Work</div>
+          <div class="calc-result-value" id="calcManualCost">$46,800</div>
+        </div>
+
+        <div class="calc-divider"></div>
+
+        <div class="calc-result-group">
+          <div class="calc-result-label">Projected Annual Cost with AI</div>
+          <div class="calc-result-value" id="calcAICost">$11,500</div>
+        </div>
+
+        <div class="calc-divider"></div>
+
+        <div class="calc-result-group">
+          <div class="calc-result-label">Annual Savings</div>
+          <div class="calc-result-value savings" id="calcSavings">$35,300</div>
+        </div>
+
+        <div class="calc-divider"></div>
+
+        <div class="calc-result-group">
+          <div class="calc-result-label">ROI Timeline</div>
+          <div class="calc-result-value" id="calcROI" style="font-size:32px">Pays for itself in 1 month</div>
+        </div>
+
+        <div class="calc-divider"></div>
+
+        <div class="calc-result-group">
+          <div class="calc-result-label">Hours Reclaimed Per Year</div>
+          <div class="calc-result-value" id="calcHoursReclaimed" style="font-size:32px">728 hours</div>
+        </div>
       </div>
-      <div class="service-row">
-        <div class="service-name">Operations & Workflows<span>Data entry, document generation, approvals</span></div>
-        <div class="service-price">$1,250</div>
-        <div class="service-old">$12,000+</div>
-      </div>
-      <div class="service-row">
-        <div class="service-name">Finance & Accounting<span>Invoice processing, reconciliation, reporting</span></div>
-        <div class="service-price">$1,750</div>
-        <div class="service-old">$20,000+</div>
-      </div>
-      <div class="service-row">
-        <div class="service-name">Customer Support<span>Ticket routing, FAQ bots, escalation workflows</span></div>
-        <div class="service-price">$1,250</div>
-        <div class="service-old">$18,000+</div>
-      </div>
-      <div class="service-row">
-        <div class="service-name">Ongoing Support<span>Error handling, updates, optimization</span></div>
-        <div class="service-price">$375/mo</div>
-        <div class="service-old">$3,000+/mo</div>
-      </div>
+    </div>
+
+    <div class="calc-cta fade-up">
+      <a href="https://calendly.com/admin-intellismartco/30min" target="_blank" class="btn btn-primary" style="font-size:18px;padding:22px 52px">Get Your Custom AI Roadmap →</a>
     </div>
     </div>
   </section>
@@ -2357,6 +2523,100 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+
+// ═══ SAVINGS CALCULATOR ═══
+(function(){
+  const teamSlider = document.getElementById('calcTeam');
+  const rateSlider = document.getElementById('calcRate');
+  const hoursSlider = document.getElementById('calcHours');
+  const teamVal = document.getElementById('calcTeamVal');
+  const rateVal = document.getElementById('calcRateVal');
+  const hoursVal = document.getElementById('calcHoursVal');
+  const deptChecks = document.querySelectorAll('.calc-checkboxes input[type="checkbox"]');
+
+  const outManual = document.getElementById('calcManualCost');
+  const outAI = document.getElementById('calcAICost');
+  const outSavings = document.getElementById('calcSavings');
+  const outROI = document.getElementById('calcROI');
+  const outHours = document.getElementById('calcHoursReclaimed');
+
+  // Animated number counter
+  const animTargets = {};
+  function animateValue(el, target, prefix, suffix) {
+    const key = el.id;
+    if (animTargets[key]) cancelAnimationFrame(animTargets[key]);
+    const start = parseInt(el.dataset.current || '0');
+    const duration = 400;
+    const startTime = performance.now();
+    function tick(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(start + (target - start) * ease);
+      el.textContent = prefix + current.toLocaleString() + suffix;
+      el.dataset.current = current;
+      if (progress < 1) animTargets[key] = requestAnimationFrame(tick);
+    }
+    animTargets[key] = requestAnimationFrame(tick);
+  }
+
+  function calculate() {
+    const team = parseInt(teamSlider.value);
+    const rate = parseInt(rateSlider.value);
+    const hours = parseInt(hoursSlider.value);
+
+    teamVal.textContent = team;
+    rateVal.textContent = '$' + rate;
+    hoursVal.textContent = hours + ' hrs';
+
+    // Manual cost
+    const manualCost = hours * rate * 52;
+
+    // AI cost from selected departments
+    let totalSetup = 0;
+    let totalMonthly = 0;
+    let deptCount = 0;
+    deptChecks.forEach(cb => {
+      if (cb.checked) {
+        totalSetup += parseInt(cb.dataset.setup);
+        totalMonthly += parseInt(cb.dataset.monthly);
+        deptCount++;
+      }
+    });
+    const aiCost = deptCount > 0 ? totalSetup + (totalMonthly * 12) : 0;
+
+    // Savings
+    const savings = Math.max(0, manualCost - aiCost);
+
+    // ROI timeline
+    const monthlySavings = savings / 12;
+    let roiText = '—';
+    if (monthlySavings > 0 && totalSetup > 0) {
+      const months = Math.ceil(totalSetup / monthlySavings);
+      roiText = months <= 1 ? 'Pays for itself in 1 month' : 'Pays for itself in ' + months + ' months';
+    } else if (deptCount === 0) {
+      roiText = 'Select a department';
+    }
+
+    // Hours reclaimed (70% of manual hours)
+    const hoursReclaimed = Math.round(hours * 0.7 * 52);
+
+    // Animate outputs
+    animateValue(outManual, manualCost, '$', '');
+    animateValue(outAI, aiCost, '$', '');
+    animateValue(outSavings, savings, '$', '');
+    outROI.textContent = roiText;
+    animateValue(outHours, hoursReclaimed, '', ' hours');
+  }
+
+  teamSlider.addEventListener('input', calculate);
+  rateSlider.addEventListener('input', calculate);
+  hoursSlider.addEventListener('input', calculate);
+  deptChecks.forEach(cb => cb.addEventListener('change', calculate));
+
+  // Initial calculation
+  calculate();
+})();
 </script>
 </body>
 </html>
