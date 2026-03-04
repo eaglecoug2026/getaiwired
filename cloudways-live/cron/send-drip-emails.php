@@ -1,7 +1,8 @@
 <?php
 /**
  * GetAIWired - Drip Email Cron Job
- * Run every 15 minutes: */15 * * * * php /path/to/cron/send-drip-emails.php >> /tmp/getaiwired-drip.log 2>&1
+ * Cron: every 15 minutes
+ * Example: star-slash-15 * * * * php /path/to/cron/send-drip-emails.php >> /tmp/getaiwired-drip.log 2>&1
  */
 
 // Prevent web access
