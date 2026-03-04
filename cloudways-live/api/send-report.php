@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 require_once __DIR__ . '/../includes/email_helper.php';
 require_once __DIR__ . '/log-submission.php';
+require_once __DIR__ . '/../includes/drip_campaign.php';
 
 // Get JSON input
 $input = json_decode(file_get_contents('php://input'), true);
@@ -181,6 +182,10 @@ $subject = "$company's AI Readiness Score: $score%";
 $result = sendEmail($email, $subject, $htmlBody, $textBody, 'info@intellismartstaffing.com', 'info@intellismartstaffing.com');
 
 if ($result['success']) {
+    // Enroll in drip campaign after successful report send
+    $topOpp = !empty($opportunities[0]['title']) ? $opportunities[0]['title'] : 'process automation';
+    enrollInDripCampaign($email, $firstName, $company, $score, $level, $topOpp, $opportunities, $industry);
+
     echo json_encode(['success' => true, 'message' => 'Report sent successfully']);
 } else {
     http_response_code(500);

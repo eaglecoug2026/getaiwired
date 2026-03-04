@@ -29,6 +29,7 @@ function logSubmission($data) {
         'aiExperience' => $data['summary'][3]['value'] ?? '',
         'topGoal' => $data['summary'][4]['value'] ?? '',
         'budget' => $data['summary'][5]['value'] ?? '',
+        'opportunities' => $data['opportunities'] ?? [],
     ];
     
     // Append to log file (JSONL format - one JSON object per line)
