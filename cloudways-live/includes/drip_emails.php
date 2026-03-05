@@ -27,7 +27,7 @@ function getDripEmail($emailNumber, $campaign) {
     $topOpp = htmlspecialchars($campaign['top_opportunity'] ?: 'process automation');
     $industry = htmlspecialchars($campaign['industry'] ?: 'your');
     $unsubToken = $campaign['unsubscribe_token'];
-    $unsubUrl = "https://getaiwired.com/api/unsubscribe.php?token=" . urlencode($unsubToken);
+    $unsubUrl = "https://intellismartai.com/api/unsubscribe.php?token=" . urlencode($unsubToken);
 
     $opportunities = [];
     if (!empty($campaign['opportunities_json'])) {
