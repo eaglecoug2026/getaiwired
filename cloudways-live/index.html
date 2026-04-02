@@ -231,9 +231,56 @@ CHANGELOG — IntelliSmart AI Website v6
       background: var(--gold);
     }
 
+    /* Mobile menu toggle */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 1002;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      margin: 6px 0;
+      transition: all 0.3s;
+    }
+    .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
     @media (max-width: 768px) {
       .nav { padding: 16px 24px; }
-      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: var(--cream);
+        padding: 100px 40px 40px;
+        gap: 24px;
+        transition: right 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        box-shadow: -4px 0 20px rgba(0,0,0,0.08);
+        z-index: 1001;
+      }
+      .nav-links.open { right: 0; }
+      .nav-links a { font-size: 18px; }
+      .nav-links .nav-cta { text-align: center; margin-top: 16px; }
+      .nav-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.3);
+        z-index: 1000;
+      }
+      .nav-overlay.open { display: block; }
     }
 
     /* ═══ BUTTONS ═══ */
@@ -1514,6 +1561,61 @@ CHANGELOG — IntelliSmart AI Website v6
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
+    /* ═══ CASE STUDY ═══ */
+    .casestudy-section {
+      padding: 120px 0;
+    }
+    .casestudy-card {
+      border: 1px solid var(--border);
+      padding: 56px;
+      position: relative;
+    }
+    .casestudy-badge {
+      position: absolute;
+      top: -14px;
+      left: 56px;
+      background: var(--accent);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+    }
+    .casestudy-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+    .casestudy-stats {
+      display: flex;
+      gap: 40px;
+    }
+    .casestudy-stat-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 36px;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .casestudy-stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 4px;
+    }
+    .casestudy-quote {
+      border-left: 3px solid var(--accent);
+      padding-left: 32px;
+    }
+    @media (max-width: 768px) {
+      .casestudy-card { padding: 32px 24px; }
+      .casestudy-badge { left: 24px; }
+      .casestudy-grid { grid-template-columns: 1fr; gap: 32px; }
+      .casestudy-stats { flex-wrap: wrap; gap: 24px; }
+    }
+
     /* ═══ FAQ ═══ */
     .faq-section {
       padding: 160px 0;
@@ -1785,13 +1887,17 @@ CHANGELOG — IntelliSmart AI Website v6
   <!-- NAV -->
   <nav class="nav">
     <a href="#" class="nav-logo">IntelliSmart AI</a>
-    <div class="nav-links">
-      <a href="#proof">Proof</a>
-      <a href="#how">Process</a>
-      <a href="#services">Services</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#" class="nav-cta" onclick="event.preventDefault();startAudit()">Take the Test</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#proof" onclick="closeNav()">Proof</a>
+      <a href="#how" onclick="closeNav()">Process</a>
+      <a href="#services" onclick="closeNav()">Services</a>
+      <a href="#pricing" onclick="closeNav()">Pricing</a>
+      <a href="#" class="nav-cta" onclick="event.preventDefault();closeNav();startAudit()">Take the Test</a>
     </div>
+    <button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-overlay" id="navOverlay" onclick="closeNav()"></div>
   </nav>
 
   <!-- HERO -->
@@ -1854,6 +1960,45 @@ CHANGELOG — IntelliSmart AI Website v6
       <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/admin-intellismartco/30min'});return false;" class="btn btn-primary">Book a Free AI Assessment</a>
     </div>
     </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDY -->
+  <section class="casestudy-section" id="casestudy">
+    <div class="container">
+      <div class="services-header">
+        <div class="label reveal">Real Results</div>
+        <h2 class="display-2 reveal reveal-delay-1">What we've built</h2>
+      </div>
+      <div class="casestudy-card fade-up">
+        <div class="casestudy-badge">Case Study</div>
+        <div class="casestudy-grid">
+          <div class="casestudy-body">
+            <h3 style="font-family:'Instrument Serif',serif;font-size:clamp(28px,4vw,40px);margin-bottom:16px;letter-spacing:-0.02em">Full Database-to-NetSuite Integration</h3>
+            <p style="font-size:17px;color:var(--text-secondary);line-height:1.7;margin-bottom:24px">Built a complete database render pipeline feeding directly into NetSuite ERP — including custom Suitelet dashboards for real-time operational visibility. Oracle quoted the same scope at <strong>$80,000</strong>.</p>
+            <div class="casestudy-stats">
+              <div class="casestudy-stat">
+                <div class="casestudy-stat-num">$80K</div>
+                <div class="casestudy-stat-label">Saved vs. Oracle</div>
+              </div>
+              <div class="casestudy-stat">
+                <div class="casestudy-stat-num">100%</div>
+                <div class="casestudy-stat-label">Automated Data Flow</div>
+              </div>
+              <div class="casestudy-stat">
+                <div class="casestudy-stat-num">Custom</div>
+                <div class="casestudy-stat-label">Suitelet Dashboards</div>
+              </div>
+            </div>
+          </div>
+          <div class="casestudy-quote">
+            <div style="font-family:'Instrument Serif',serif;font-size:64px;line-height:1;color:var(--accent);margin-bottom:8px">"</div>
+            <p style="font-size:18px;font-style:italic;color:var(--text-primary);line-height:1.7;margin-bottom:20px">We replaced an $80K Oracle engagement with a custom-built system that actually fits how our team works — delivered in a fraction of the time.</p>
+            <div style="font-size:14px;font-weight:600;color:var(--text-primary)">TLT</div>
+            <div style="font-size:13px;color:var(--text-muted)">NetSuite ERP Integration</div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -2170,7 +2315,7 @@ function showAGate(){
       <input class="gate-input" type="text" id="gN" placeholder="Full Name" oninput="gChk()">
       <input class="gate-input" type="email" id="gE" placeholder="Work Email" oninput="gChk()">
       <input class="gate-input" type="text" id="gC" placeholder="Company Name" oninput="gChk()">
-      <input class="gate-input" type="tel" id="gP" placeholder="Phone (optional)"">
+      <input class="gate-input" type="tel" id="gP" placeholder="Phone (optional)">
       <button class="gate-submit" id="gB" onclick="gSubmit()">See My Results →</button>
       <p style="margin-top:20px;font-size:13px;color:var(--text-muted)">We'll never spam you.</p>
     </div>`;
@@ -2447,6 +2592,18 @@ function startWordReveal(element) {
       word.classList.add('active');
     }, i * 60);
   });
+}
+
+// Mobile nav toggle
+function toggleNav() {
+  document.getElementById('navToggle').classList.toggle('open');
+  document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('navOverlay').classList.toggle('open');
+}
+function closeNav() {
+  document.getElementById('navToggle').classList.remove('open');
+  document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('navOverlay').classList.remove('open');
 }
 
 // FAQ toggle
