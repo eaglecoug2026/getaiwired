@@ -2615,12 +2615,20 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 // ═══ AUTOMATION SCENARIOS — CINEMATIC STORYBOARD ═══
 (function(){
 
-  // Scene photos — real images
+  // Scene photos — unique per scenario
   var sceneImages = {
     re1: 'images/scene-problem.png',
     re2: 'images/scene-complexity.png',
     re3: 'images/scene-solution.png',
-    re4: 'images/scene-result.png'
+    re4: 'images/scene-result.png',
+    sales1: 'images/sales-1.jpg',
+    sales2: 'images/sales-2.png',
+    sales3: 'images/sales-3.jpg',
+    sales4: 'images/sales-4.png',
+    acct1: 'images/acct-1.png',
+    acct2: 'images/acct-2.jpg',
+    acct3: 'images/acct-3.jpg',
+    acct4: 'images/acct-4.jpg'
   };
 
   function sceneSvg(id) {
@@ -2642,18 +2650,18 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     },
     sales: {
       scenes: [
-        { svg: 're1', text: 'Following up with every new lead quickly and personally was impossible at scale.' },
-        { svg: 're2', text: 'Reps spent hours researching companies and writing emails instead of closing deals.' },
-        { svg: 're3', text: 'With AI, every lead now gets scored, prioritized, and contacted within minutes — automatically.' },
-        { svg: 're4', text: '', stat: '3x more leads contacted, same headcount', statLabel: 'The Result' }
+        { svg: 'sales1', text: 'Following up with every new lead quickly and personally was impossible at scale.' },
+        { svg: 'sales2', text: 'Reps spent hours researching companies and writing emails instead of closing deals.' },
+        { svg: 'sales3', text: 'With AI, every lead now gets scored, prioritized, and contacted within minutes — automatically.' },
+        { svg: 'sales4', text: '', stat: '3x more leads contacted, same headcount', statLabel: 'The Result' }
       ]
     },
     accounting: {
       scenes: [
-        { svg: 're1', text: 'Categorizing hundreds of transactions by hand each month drained the accounting team.' },
-        { svg: 're2', text: 'Catching duplicate charges and anomalies before month-end close felt like finding needles in a haystack.' },
-        { svg: 're3', text: 'Now, AI handles categorization, flags issues, and generates the close report in one click.' },
-        { svg: 're4', text: '', stat: 'Monthly close: 5 days → 1 day', statLabel: 'The Result' }
+        { svg: 'acct1', text: 'Categorizing hundreds of transactions by hand each month drained the accounting team.' },
+        { svg: 'acct2', text: 'Catching duplicate charges and anomalies before month-end close felt like finding needles in a haystack.' },
+        { svg: 'acct3', text: 'Now, AI handles categorization, flags issues, and generates the close report in one click.' },
+        { svg: 'acct4', text: '', stat: 'Monthly close: 5 days → 1 day', statLabel: 'The Result' }
       ]
     }
   };
