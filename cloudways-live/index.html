@@ -1945,18 +1945,23 @@ CHANGELOG — IntelliSmart AI Website v6
 <script>
 // ═══ ASSESSMENT ═══
 const QUESTIONS = [
-  {q:'How is data entered into your main systems?',cat:'Data',o:['Typed in by hand','Copy-paste from templates','Partially automated','Fully automated pipelines']},
+  {q:'What AI tools does your team use?',cat:'AI Tools',o:['None','ChatGPT','Claude','Google Gemini','Microsoft Copilot','Grok','Other']},
+  {q:'Do you use basic AI modes, or more advanced models such as code, vision, or agents?',cat:'AI Depth',o:['We don\'t use AI','Basic chat only','Sometimes use advanced features','Regularly use code, vision, agents, or APIs']},
+  {q:'Describe your company\'s AI development team.',cat:'AI Team',o:['Just myself','2–4 people','5–9 people','10+ people']},
+  {q:'What is the most useful AI tool or program your team has created?',cat:'AI Build',o:['Nothing yet','Simple automations or prompts','Internal tools or workflows','Production apps or custom AI systems']},
+  {q:'How complex is your company\'s AI skill base — how well-trained are your bots or memory files?',cat:'AI Maturity',o:['No bots or memory files','Basic prompts, no memory','Some structured knowledge bases','Advanced memory, fine-tuning, or custom training']},
   {q:'When a new lead comes in, what happens?',cat:'Sales',o:['Try to remember to follow up','Manual process exists','CRM reminders trigger','Auto-qualified and routed']},
   {q:'What happens when a customer contacts you after hours?',cat:'Support',o:['They wait until morning','Auto-reply email only','Basic chatbot or FAQ','AI handles and routes 24/7']},
   {q:'How do you onboard new clients?',cat:'Operations',o:['No formal process','Manual checklist','Partly automated workflow','Fully automated onboarding']},
-  {q:'How are documents and reports created?',cat:'Reporting',o:['From scratch every time','Templates filled manually','Some fields auto-populate','Generated automatically']},
-  {q:'How do you track business performance?',cat:'Analytics',o:['Gut feeling','Check tools separately','Central dashboard','Real-time alerts and AI insights']},
   {q:'How does your team handle scheduling?',cat:'Admin',o:['Phone/email back and forth','Calendar link shared manually','Auto-booking with some tool','Fully automated scheduling']},
-  {q:'How personalized is your outreach?',cat:'Marketing',o:['Same message to everyone','Basic name/company merge','Segment-based content','AI-personalized per recipient']}
+  {q:'How personalized is your outreach?',cat:'Marketing',o:['Same message to everyone','Basic name/company merge','Segment-based content','AI-personalized per recipient']},
+  {q:'How is data entered into your main systems?',cat:'Data',o:['Typed in by hand','Copy-paste from templates','Partially automated','Fully automated pipelines']},
+  {q:'How are documents and reports created?',cat:'Reporting',o:['From scratch every time','Templates filled manually','Some fields auto-populate','Generated automatically']},
+  {q:'How do you track business performance?',cat:'Analytics',o:['Gut feeling','Check tools separately','Central dashboard','Real-time alerts and AI insights']}
 ];
 
-const CAT_ICONS = {Data:'⎔',Sales:'◆',Support:'◇',Operations:'▣',Reporting:'▤',Analytics:'◉',Admin:'▢',Marketing:'△'};
-const TOTAL = 8;
+const CAT_ICONS = {'AI Tools':'◈','AI Depth':'◇','AI Team':'▣','AI Build':'◆','AI Maturity':'◉',Sales:'◆',Support:'◇',Operations:'▣',Reporting:'▤',Analytics:'◉',Admin:'▢',Marketing:'△',Data:'⎔'};
+const TOTAL = 13;
 
 let aAnswers={}, aIdx=0, aLead={};
 
@@ -1977,7 +1982,7 @@ function showAIntro(){
   document.getElementById('aBody').innerHTML=`
     <div style="text-align:center;max-width:420px">
       <h2 style="font-family:'Instrument Serif',serif;font-size:40px;margin-bottom:20px;line-height:1.1;letter-spacing:-0.02em">How ready is your business for AI?</h2>
-      <p style="color:var(--text-secondary);font-size:18px;margin-bottom:48px">8 questions. 90 seconds. Personalized report.</p>
+      <p style="color:var(--text-secondary);font-size:18px;margin-bottom:48px">13 questions. 2 minutes. Personalized report.</p>
       <button class="btn btn-primary" style="width:100%" onclick="showAQ()">Start Assessment →</button>
     </div>`;
 }
@@ -2034,15 +2039,18 @@ function gSubmit(){
 function showAResults(){
   document.getElementById('aProgress').style.width='100%';
   
-  // Score per category (0-3 each, 24 max total)
-  let sum=0;
+  // Score per category — each question normalized to 0-3
+  let sum=0, maxSum=0;
   const catScores = QUESTIONS.map((q,i)=>{
     const v = aAnswers[i]||0;
-    sum+=v;
-    return {cat:q.cat, score:v, max:3, pct:Math.round(v/3*100)};
+    const maxOpt = q.o.length-1;
+    const normalized = Math.round((v/maxOpt)*3);
+    sum+=normalized;
+    maxSum+=3;
+    return {cat:q.cat, score:normalized, max:3, pct:Math.round(normalized/3*100)};
   });
-  
-  const score = Math.round((sum/24)*100);
+
+  const score = Math.round((sum/maxSum)*100);
   const tier = score<=20?{l:'Manual Operations',col:'#8B3A3A',msg:'Your business is running almost entirely on manual effort. There\'s significant opportunity to reclaim time and reduce errors.'}
     :score<=45?{l:'Partially Automated',col:'#8B7D6B',msg:'You\'ve started automating, but key processes still depend on people doing repetitive work. The biggest gains are still ahead.'}
     :score<=70?{l:'Smart Operations',col:'#4A6B5D',msg:'Your systems are working for you in some areas. Targeted automation in your weaker categories could unlock the next level.'}
