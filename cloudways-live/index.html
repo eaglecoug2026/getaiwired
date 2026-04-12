@@ -1950,18 +1950,13 @@ const QUESTIONS = [
   {q:'Describe your company\'s AI development team.',cat:'AI Team',o:['Just myself','2–4 people','5–9 people','10+ people']},
   {q:'What is the most useful AI tool or program your team has created?',cat:'AI Build',o:['Nothing yet','Simple automations or prompts','Internal tools or workflows','Production apps or custom AI systems']},
   {q:'How complex is your company\'s AI skill base — how well-trained are your bots or memory files?',cat:'AI Maturity',o:['No bots or memory files','Basic prompts, no memory','Some structured knowledge bases','Advanced memory, fine-tuning, or custom training']},
-  {q:'When a new lead comes in, what happens?',cat:'Sales',o:['Try to remember to follow up','Manual process exists','CRM reminders trigger','Auto-qualified and routed']},
-  {q:'What happens when a customer contacts you after hours?',cat:'Support',o:['They wait until morning','Auto-reply email only','Basic chatbot or FAQ','AI handles and routes 24/7']},
-  {q:'How do you onboard new clients?',cat:'Operations',o:['No formal process','Manual checklist','Partly automated workflow','Fully automated onboarding']},
-  {q:'How does your team handle scheduling?',cat:'Admin',o:['Phone/email back and forth','Calendar link shared manually','Auto-booking with some tool','Fully automated scheduling']},
-  {q:'How personalized is your outreach?',cat:'Marketing',o:['Same message to everyone','Basic name/company merge','Segment-based content','AI-personalized per recipient']},
   {q:'How is data entered into your main systems?',cat:'Data',o:['Typed in by hand','Copy-paste from templates','Partially automated','Fully automated pipelines']},
   {q:'How are documents and reports created?',cat:'Reporting',o:['From scratch every time','Templates filled manually','Some fields auto-populate','Generated automatically']},
   {q:'How do you track business performance?',cat:'Analytics',o:['Gut feeling','Check tools separately','Central dashboard','Real-time alerts and AI insights']}
 ];
 
-const CAT_ICONS = {'AI Tools':'◈','AI Depth':'◇','AI Team':'▣','AI Build':'◆','AI Maturity':'◉',Sales:'◆',Support:'◇',Operations:'▣',Reporting:'▤',Analytics:'◉',Admin:'▢',Marketing:'△',Data:'⎔'};
-const TOTAL = 13;
+const CAT_ICONS = {'AI Tools':'◈','AI Depth':'◇','AI Team':'▣','AI Build':'◆','AI Maturity':'◉',Data:'⎔',Reporting:'▤',Analytics:'◉'};
+const TOTAL = 8;
 
 let aAnswers={}, aIdx=0, aLead={};
 
@@ -1982,7 +1977,7 @@ function showAIntro(){
   document.getElementById('aBody').innerHTML=`
     <div style="text-align:center;max-width:420px">
       <h2 style="font-family:'Instrument Serif',serif;font-size:40px;margin-bottom:20px;line-height:1.1;letter-spacing:-0.02em">How ready is your business for AI?</h2>
-      <p style="color:var(--text-secondary);font-size:18px;margin-bottom:48px">13 questions. 2 minutes. Personalized report.</p>
+      <p style="color:var(--text-secondary);font-size:18px;margin-bottom:48px">8 questions. 90 seconds. Personalized report.</p>
       <button class="btn btn-primary" style="width:100%" onclick="showAQ()">Start Assessment →</button>
     </div>`;
 }
