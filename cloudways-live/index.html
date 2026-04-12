@@ -1288,6 +1288,11 @@ CHANGELOG — IntelliSmart AI Website v6
       background: rgba(139, 125, 107, 0.05);
     }
 
+    .assess-option.selected {
+      border-color: #4A6B5D;
+      background: rgba(74,107,93,0.08);
+    }
+
     .assess-option strong {
       color: var(--text-muted);
       margin-right: 12px;
@@ -1945,7 +1950,7 @@ CHANGELOG — IntelliSmart AI Website v6
 <script>
 // ═══ ASSESSMENT ═══
 const QUESTIONS = [
-  {q:'What AI tools does your team use?',cat:'AI Tools',o:['None','ChatGPT','Claude','Google Gemini','Microsoft Copilot','Grok','Other']},
+  {q:'What AI tools does your team use?',cat:'AI Tools',multi:true,o:['None','ChatGPT','Claude','Google Gemini','Microsoft Copilot','Grok','Other']},
   {q:'Do you use basic AI modes, or more advanced models such as code, vision, or agents?',cat:'AI Depth',o:['We don\'t use AI','Basic chat only','Sometimes use advanced features','Regularly use code, vision, agents, or APIs']},
   {q:'Describe your company\'s AI development team.',cat:'AI Team',o:['Just myself','2–4 people','5–9 people','10+ people']},
   {q:'What is the most useful AI tool or program your team has created?',cat:'AI Build',o:['Nothing yet','Simple automations or prompts','Internal tools or workflows','Production apps or custom AI systems']},
@@ -1982,6 +1987,8 @@ function showAIntro(){
     </div>`;
 }
 
+let aMultiSel=[];
+
 function showAQ(){
   if(aIdx>=TOTAL){showAGate();return;}
   const q=QUESTIONS[aIdx];
@@ -1992,13 +1999,33 @@ function showAQ(){
       <div style="font-size:11px;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;border:1px solid var(--border);padding:3px 10px">${q.cat}</div>
     </div>
     <div class="assess-q-text">${q.q}</div>`;
-  q.o.forEach((opt,i)=>{
-    h+=`<button class="assess-option" onclick="aPick(${i})"><strong>${String.fromCharCode(65+i)}</strong>${opt}</button>`;
-  });
+  if(q.multi){
+    aMultiSel = Array.isArray(aAnswers[aIdx]) ? [...aAnswers[aIdx]] : [];
+    h+=`<p style="font-size:13px;color:var(--text-muted);margin-bottom:12px">Select all that apply</p>`;
+    q.o.forEach((opt,i)=>{
+      const sel = aMultiSel.includes(i) ? ' selected' : '';
+      h+=`<button class="assess-option${sel}" id="mo${i}" onclick="aToggle(${i})"><strong>${String.fromCharCode(65+i)}</strong>${opt}</button>`;
+    });
+    h+=`<button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="aMultiNext()">Next →</button>`;
+  } else {
+    q.o.forEach((opt,i)=>{
+      h+=`<button class="assess-option" onclick="aPick(${i})"><strong>${String.fromCharCode(65+i)}</strong>${opt}</button>`;
+    });
+  }
   if(aIdx>0) h+=`<button class="assess-back" onclick="aIdx--;showAQ()">← Back</button>`;
   h+='</div>';
   document.getElementById('aBody').innerHTML=h;
 }
+
+function aToggle(i){
+  const none=0;
+  if(i===none){aMultiSel=[none];}
+  else{aMultiSel=aMultiSel.filter(x=>x!==none);const idx=aMultiSel.indexOf(i);if(idx>-1)aMultiSel.splice(idx,1);else aMultiSel.push(i);}
+  const q=QUESTIONS[aIdx];
+  q.o.forEach((_,j)=>{const el=document.getElementById('mo'+j);if(el){el.classList.toggle('selected',aMultiSel.includes(j));}});
+}
+
+function aMultiNext(){if(aMultiSel.length===0)return;aAnswers[aIdx]=aMultiSel;aIdx++;showAQ();}
 
 function aPick(v){aAnswers[aIdx]=v;aIdx++;showAQ();}
 
@@ -2037,9 +2064,17 @@ function showAResults(){
   // Score per category — each question normalized to 0-3
   let sum=0, maxSum=0;
   const catScores = QUESTIONS.map((q,i)=>{
-    const v = aAnswers[i]||0;
-    const maxOpt = q.o.length-1;
-    const normalized = Math.round((v/maxOpt)*3);
+    let normalized;
+    if(q.multi){
+      const sel = Array.isArray(aAnswers[i]) ? aAnswers[i] : [];
+      const hasNone = sel.includes(0);
+      const toolCount = hasNone ? 0 : sel.length;
+      normalized = toolCount===0?0:toolCount<=1?1:toolCount<=3?2:3;
+    } else {
+      const v = aAnswers[i]||0;
+      const maxOpt = q.o.length-1;
+      normalized = Math.round((v/maxOpt)*3);
+    }
     sum+=normalized;
     maxSum+=3;
     return {cat:q.cat, score:normalized, max:3, pct:Math.round(normalized/3*100)};
