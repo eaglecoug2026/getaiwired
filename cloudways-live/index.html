@@ -191,7 +191,9 @@ CHANGELOG — IntelliSmart AI Website v6
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: linear-gradient(180deg, rgba(236,234,221,0.98) 0%, rgba(236,234,221,0) 100%);
+      background: rgba(236,234,221,0.97);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
     .nav-logo {
@@ -376,6 +378,12 @@ CHANGELOG — IntelliSmart AI Website v6
 
     @media (max-width: 1200px) {
       .hero-graphic { display: none; }
+    }
+
+    /* ═══ HERO VIDEO ═══ */
+    .hero-video {
+      padding: 60px 20px 80px;
+      background: var(--cream);
     }
 
     /* ═══ EXPANDING SECTION ═══ */
@@ -878,205 +886,6 @@ CHANGELOG — IntelliSmart AI Website v6
       .scene-narrative { font-size: 19px; }
     }
 
-    .pricing-section {
-      padding: 160px 0;
-      background: var(--warm-beige);
-    }
-
-    @media (max-width: 768px) {
-      /* services table removed — replaced by calculator */
-    }
-
-    .services-header {
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto 80px;
-    }
-
-    .services-header h2 {
-      margin-top: 16px;
-      margin-bottom: 24px;
-    }
-
-    .services-header p {
-      font-size: 20px;
-      color: var(--text-secondary);
-    }
-
-    .tiers {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      position: relative;
-    }
-
-    .tier {
-      background: var(--white);
-      padding: 56px 40px;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-      border: 1px solid var(--border);
-      margin-right: -1px;
-    }
-
-    .tier:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 24px 48px rgba(51,51,52,0.08);
-      z-index: 2;
-    }
-
-    .tier-featured {
-      background: var(--text-primary);
-      position: relative;
-      border-color: var(--text-primary);
-      transform: translateY(-12px);
-      padding: 72px 40px 56px;
-      box-shadow: 0 32px 64px rgba(51,51,52,0.15);
-      z-index: 3;
-    }
-
-    .tier-featured:hover {
-      transform: translateY(-20px);
-      box-shadow: 0 40px 80px rgba(51,51,52,0.2);
-    }
-
-    .tier-featured .tier-label,
-    .tier-featured .tier-name,
-    .tier-featured .tier-setup,
-    .tier-featured .tier-mo,
-    .tier-featured .tier-item {
-      color: var(--white);
-    }
-
-    .tier-featured .tier-mo span { color: rgba(255,255,255,0.4); }
-    .tier-featured .tier-item { border-color: rgba(255,255,255,0.08); }
-    .tier-featured .tier-compare { color: rgba(255,255,255,0.3); }
-
-    .tier-badge {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      text-align: center;
-      background: #4A6B5D;
-      color: var(--white);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 10px 20px;
-    }
-
-    .tier-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-    }
-
-    .tier-name {
-      font-family: 'Instrument Serif', serif;
-      font-size: 32px;
-      color: var(--text-primary);
-      margin-bottom: 32px;
-      letter-spacing: -0.02em;
-    }
-
-    .tier-setup {
-      font-family: 'Instrument Serif', serif;
-      font-size: 56px;
-      color: var(--text-primary);
-      letter-spacing: -0.03em;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-
-    .tier-featured .tier-setup {
-      font-size: 64px;
-    }
-
-    .tier-mo {
-      font-size: 15px;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
-    }
-
-    .tier-mo span { color: var(--text-muted); }
-
-    .tier-compare {
-      font-size: 14px;
-      color: #8B3A3A;
-      margin-bottom: 40px;
-      position: relative;
-      display: inline-block;
-    }
-
-    .tier-compare span {
-      text-decoration: line-through;
-    }
-
-    .tier-items {
-      flex: 1;
-      margin-bottom: 40px;
-    }
-
-    .tier-item {
-      font-size: 14px;
-      color: var(--text-secondary);
-      padding: 14px 0;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .tier-item::before {
-      content: '✓';
-      color: #4A6B5D;
-      font-weight: 700;
-      font-size: 13px;
-      flex-shrink: 0;
-    }
-
-    .tier-featured .tier-item::before { color: #7BAF9A; }
-
-    .tier-item:last-child { border-bottom: none; }
-
-    .tier-cta {
-      margin-top: auto;
-    }
-
-    .tier-cta .btn { width: 100%; text-align: center; }
-
-    /* Full Operations special treatment */
-    .tier-enterprise {
-      background: linear-gradient(165deg, var(--white) 0%, var(--cream) 100%);
-      border: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .tier-enterprise::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--text-primary), var(--text-muted));
-    }
-
-    .tier-enterprise:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 24px 48px rgba(51,51,52,0.08);
-    }
-
-    @media (max-width: 768px) {
-      .tiers { grid-template-columns: 1fr; }
-    }
 
     /* ═══ HOW IT WORKS ═══ */
     .how-section {
@@ -1900,10 +1709,7 @@ CHANGELOG — IntelliSmart AI Website v6
   <nav class="nav">
     <a href="#" class="nav-logo">IntelliSmart AI</a>
     <div class="nav-links" id="navLinks">
-      <a href="#proof" onclick="closeNav()">Proof</a>
-      <a href="#how" onclick="closeNav()">Process</a>
-      <a href="#services" onclick="closeNav()">Services</a>
-      <a href="#pricing" onclick="closeNav()">Pricing</a>
+      <a href="#casestudy" onclick="closeNav()">Results</a>
       <a href="#" class="nav-cta" onclick="event.preventDefault();closeNav();startAudit()">Take the Test</a>
     </div>
     <button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Menu">
@@ -1928,52 +1734,25 @@ CHANGELOG — IntelliSmart AI Website v6
     </div>
   </section>
 
+  <!-- HERO VIDEO -->
+  <section class="hero-video">
+    <div style="position: relative; width: 100%; max-width: 360px; margin: 0 auto; padding-bottom: 640px; border-radius: 12px; overflow: hidden;">
+      <iframe src="https://www.youtube.com/embed/7KSPmtFCnZU" title="IntelliSmart AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+  </section>
+
   <!-- STATEMENT — Expanding Section with Word Reveal -->
   <section class="section-expand" id="statement">
     <div class="section-expand-bg"></div>
     <div class="section-expand-content">
       <h2 class="display-2 stmt-reveal" id="stmtBlock">
-        <span class="sw">"You're</span> <span class="sw">not</span> <span class="sw">going</span> <span class="sw">to</span> <span class="sw">lose</span> <span class="sw">your</span> <span class="sw">job</span> <span class="sw">to</span> <span class="sw">AI,</span> <span class="sw">but</span> <span class="sw">you're</span> <span class="sw">going</span> <span class="sw">to</span> <span class="sw">lose</span> <span class="sw">your</span> <span class="sw">job</span> <span class="sw">to</span> <span class="sw">someone</span> <span class="sw">who</span> <span class="sw">uses</span> <span class="sw em-red" data-hl>AI."</span>
+        <span class="sw">"AI</span> <span class="sw">is</span> <span class="sw">the</span> <span class="sw">most</span> <span class="sw">powerful</span> <span class="sw">technology</span> <span class="sw">force</span> <span class="sw">of</span> <span class="sw">our</span> <span class="sw em-red" data-hl>time."</span>
         <br><span class="sw">—</span> <span class="sw">Jensen</span> <span class="sw">Huang</span> <span class="sw">(NVIDIA</span> <span class="sw">CEO)</span>
         <br><span class="sw em-green" data-hl>We</span> <span class="sw em-green" data-hl>help</span> <span class="sw em-green" data-hl>you</span> <span class="sw em-green" data-hl>get</span> <span class="sw em-green" data-hl>there.</span>
       </h2>
     </div>
   </section>
 
-  <!-- PROOF — ONE UNIFIED SECTION -->
-  <section class="proof-unified" id="proof">
-    <div class="proof-bubble">
-    <div class="container">
-    <div class="proof-unified-header reveal">
-      <h2 class="display-2">The ROI speaks for itself</h2>
-      <p>See what happens when you replace manual processes with AI automation.</p>
-    </div>
-
-    <div class="proof-unified-divider"></div>
-    <div class="proof-grid">
-      <div class="proof-card fade-up">
-        <div class="proof-metric"><span class="accent">Up to 95%</span></div>
-        <h3>Cost Reduction</h3>
-        <p>Slash operational costs by replacing manual workflows with intelligent automation.</p>
-      </div>
-      <div class="proof-card fade-up fade-up-d1">
-        <div class="proof-metric"><span class="accent">15x Faster</span></div>
-        <h3>Time to Deploy</h3>
-        <p>We ship while traditional agencies are still scoping. Get results in days, not months.</p>
-      </div>
-      <div class="proof-card fade-up fade-up-d2">
-        <div class="proof-metric"><span class="accent">78% More Deals</span></div>
-        <h3>Lead Response</h3>
-        <p>First responder wins. Automation makes you first, every time.</p>
-      </div>
-    </div>
-
-    <div style="text-align:center;margin-top:64px" class="fade-up">
-      <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/admin-intellismartco/30min'});return false;" class="btn btn-primary">Book a Free AI Assessment</a>
-    </div>
-    </div>
-    </div>
-  </section>
 
   <!-- CASE STUDY -->
   <section class="casestudy-section" id="casestudy">
@@ -2011,135 +1790,41 @@ CHANGELOG — IntelliSmart AI Website v6
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- WHAT WE AUTOMATE — Interactive Scenarios -->
-  <section class="services-section" id="services">
-    <div class="container">
-    <div class="services-header">
-      <div class="label reveal">What We Automate</div>
-      <h2 class="display-2 reveal reveal-delay-1">If your team does it twice a week, it should be automated.</h2>
-      <p class="reveal reveal-delay-1" style="font-family:'Inter',sans-serif;font-size:17px;color:var(--text-muted);margin-top:12px">See how AI transforms real workflows — pick your industry.</p>
-    </div>
-
-    <div class="scenario-pills fade-up">
-      <button class="scenario-pill active" data-scenario="re">Real Estate Agents</button>
-      <button class="scenario-pill" data-scenario="sales">Sales Teams</button>
-      <button class="scenario-pill" data-scenario="accounting">Accounting</button>
-    </div>
-
-    <div class="scenario-panel fade-up" id="scenarioPanel">
-      <div class="scene-viewport" id="sceneViewport">
-        <!-- Scenes injected by JS -->
-      </div>
-      <div class="scene-nav">
-        <button class="scene-btn outline" id="scenePrev">Back</button>
-        <div class="scene-dots" id="sceneDots"></div>
-        <button class="scene-btn" id="sceneNext">Next</button>
-      </div>
-    </div>
-
-    <div class="scenario-cta fade-up">
-      <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/admin-intellismartco/30min'});return false;" class="btn btn-primary">See what we can automate for you</a>
-    </div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section class="pricing-section" id="pricing">
-    <div class="container">
-    <div class="services-header">
-      <div class="label reveal">Pricing</div>
-      <h2 class="display-2 reveal reveal-delay-1">Pick a tier. Let's go.</h2>
-    </div>
-    <div class="tiers fade-up">
-      <div class="tier">
-        <div class="tier-label">Tier 1</div>
-        <div class="tier-name">Starter Sprint</div>
-        <div class="tier-items">
-          <div class="tier-item">Single workflow automation</div>
-          <div class="tier-item">CRM, data entry, or scheduling</div>
-          <div class="tier-item">Company reporting dashboard</div>
-          <div class="tier-item">Error monitoring & alerts</div>
-          <div class="tier-item">90-day warranty</div>
-          <div class="tier-item">Dedicated support</div>
-        </div>
-        <div class="tier-cta">
-          <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/admin-intellismartco/30min'});return false;" class="btn btn-outline" style="width:100%">Call for Pricing</a>
-        </div>
-      </div>
-      <div class="tier tier-featured fade-up fade-up-d1">
-        <div class="tier-badge">Most Popular</div>
-        <div class="tier-label">Tier 2</div>
-        <div class="tier-name">Growth</div>
-        <div class="tier-items">
-          <div class="tier-item">2–3 connected automations</div>
-          <div class="tier-item">Cross-system integrations</div>
-          <div class="tier-item">Custom dashboards & reporting</div>
-          <div class="tier-item">90-day warranty</div>
-          <div class="tier-item">Dedicated support</div>
-        </div>
-        <div class="tier-cta">
-          <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/admin-intellismartco/30min'});return false;" class="btn btn-primary" style="width:100%;background:#4A6B5D">Call for Pricing</a>
-        </div>
-      </div>
-      <div class="tier tier-enterprise fade-up fade-up-d2" style="display:flex;align-items:center;justify-content:center;text-align:center">
-        <div>
-          <div class="tier-label" style="margin-top:16px">Tier 3</div>
-          <div class="tier-name" style="font-size:36px;margin-bottom:20px">Full Operations</div>
-          <div style="font-family:'Instrument Serif',serif;font-size:72px;color:var(--text-primary);letter-spacing:-0.03em;line-height:1;margin-bottom:24px">∞</div>
-          <p style="font-size:16px;color:var(--text-secondary);line-height:1.7;margin-bottom:32px;max-width:280px;margin-left:auto;margin-right:auto">White glove service. End-to-end automation, custom AI, executive dashboards, dedicated account manager.</p>
-          <a href="javascript:void(0)" onclick="Calendly.initPopupWidget({url:'https://calendly.com/admin-intellismartco/30min'});return false;" class="btn btn-primary" style="width:100%;background:var(--text-primary)">Call for Pricing</a>
-        </div>
-      </div>
-    </div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS + ASSESSMENT (combined) -->
-  <section class="how-section" id="how">
-    <div class="how-bg"></div>
-    <div class="how-content container">
-      <div class="how-header">
-        <div class="label reveal">Get Started</div>
-        <h2 class="display-2 reveal reveal-delay-1">See where you stand. Then let us build.</h2>
-      </div>
-      <div class="how-steps">
-        <div class="how-step">
-          <div class="how-num">1</div>
-          <div class="how-step-body">
-            <h3>Take the Readiness Test</h3>
-            <p>8 questions. 90 seconds. Find out exactly which processes are costing you money and where AI automation will have the biggest impact.</p>
-            <div class="how-step-tag">Free · No commitment · Instant results</div>
+      <div class="casestudy-card fade-up" style="margin-top:48px">
+        <div class="casestudy-badge">Case Study</div>
+        <div class="casestudy-grid">
+          <div class="casestudy-body">
+            <h3 style="font-family:'Instrument Serif',serif;font-size:clamp(28px,4vw,40px);margin-bottom:16px;letter-spacing:-0.02em">Custom DocuSign Replacement with Salesforce &amp; A-Frame Sync</h3>
+            <p style="font-size:17px;color:var(--text-secondary);line-height:1.7;margin-bottom:24px">Built a full-featured electronic signature platform to replace DocuSign — integrated directly with Salesforce and their transactional program A-Frame. Assurance 832 was spending <strong>$20K/month</strong> on DocuSign. We delivered the same functionality, custom-built for their workflow.</p>
+            <div class="casestudy-stats">
+              <div class="casestudy-stat">
+                <div class="casestudy-stat-num">$240K/yr</div>
+                <div class="casestudy-stat-label">Saved vs. DocuSign</div>
+              </div>
+              <div class="casestudy-stat">
+                <div class="casestudy-stat-num">Salesforce</div>
+                <div class="casestudy-stat-label">Fully Integrated</div>
+              </div>
+              <div class="casestudy-stat">
+                <div class="casestudy-stat-num">A-Frame</div>
+                <div class="casestudy-stat-label">Synced Transactions</div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="how-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
-        <div class="how-step">
-          <div class="how-num">2</div>
-          <div class="how-step-body">
-            <h3>Free AI Audit</h3>
-            <p>30 minutes with our team reviewing your results. We map your workflows, identify highest-ROI automations, and present a transparent build plan.</p>
-            <div class="how-step-tag">30 min · Free · No pressure</div>
-          </div>
-        </div>
-        <div class="how-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
-        <div class="how-step">
-          <div class="how-num">3</div>
-          <div class="how-step-body">
-            <h3>Build, Deploy & Support</h3>
-            <p>We build against real data, test with your team, and deploy. Then we monitor, maintain, and optimize. 90-day warranty included.</p>
-            <div class="how-step-tag">Live in days, not months</div>
+          <div class="casestudy-quote">
+            <div style="font-family:'Instrument Serif',serif;font-size:64px;line-height:1;color:var(--accent);margin-bottom:8px">"</div>
+            <p style="font-size:18px;font-style:italic;color:var(--text-primary);line-height:1.7;margin-bottom:20px">We were paying $20K a month for DocuSign. They built us the same thing — synced with Salesforce and A-Frame. Game changer.</p>
+            <div style="font-size:14px;font-weight:600;color:var(--text-primary)">Assurance 832</div>
+            <div style="font-size:13px;color:var(--text-muted)">DocuSign Replacement + Salesforce Integration</div>
           </div>
         </div>
       </div>
-
-      <div class="how-cta fade-up" style="text-align:center;margin-top:100px">
-        <button class="btn btn-primary" onclick="startAudit()" style="font-size:18px;padding:22px 52px">Take the Readiness Test →</button>
-        <p style="font-size:14px;color:var(--text-muted);margin-top:20px">No credit card. No commitment. Just clarity.</p>
-      </div>
     </div>
   </section>
+
+
+
 
   <!-- FAQ -->
   <section class="faq-section" id="faq">
@@ -2232,7 +1917,6 @@ CHANGELOG — IntelliSmart AI Website v6
           <a href="#proof">The Proof</a>
           <a href="#how">Process</a>
           <a href="#services">Services</a>
-          <a href="#pricing">Pricing</a>
         </div>
         <div class="footer-col">
           <h4>Legal</h4>
@@ -2475,6 +2159,7 @@ function showAResults(){
   }).catch(function(){});
 }
 
+
 // ═══ HERO WORD-BY-WORD ANIMATION ═══
 (function(){
   const words = document.querySelectorAll('#heroTitle .hw');
@@ -2656,7 +2341,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   function sceneSvg(id) {
     var src = sceneImages[id];
     if (src) {
-      return '<img src="' + src + '" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px">';
+      return '<img src="' + src + '" alt="" style="width:100%;height:100%;object-fit:contain;border-radius:8px;background:#1a1816">';
     }
     return '<div style="width:100%;height:100%;background:linear-gradient(135deg,#1a1816,#252220);border-radius:8px"></div>';
   }
